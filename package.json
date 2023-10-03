@@ -23,10 +23,25 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint"
+    ],
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "no-empty-function": "off",
+      "no-unused-vars": "off",
+      "indent": [
+        "error",
+        2,
+        {}
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -39,5 +54,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
   }
 }
