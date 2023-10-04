@@ -7,15 +7,7 @@ function LoginPage() {
   const {
     register,
     handleSubmit,
-<<<<<<< HEAD
-<<<<<<< HEAD
     // formState: { errors },
-=======
-    formState: { errors },
->>>>>>> parent of 2e1ab61 (eslint formatting)
-=======
-    // formState: { errors },s
->>>>>>> parent of 060c20f (refactor login/page.tsx)
   } = useForm();
 
   return (
