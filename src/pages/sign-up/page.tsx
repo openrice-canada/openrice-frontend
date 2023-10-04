@@ -7,11 +7,11 @@ const SignUpPage = () => {
     register,
     handleSubmit,
     setError,
-    // formState: { errors },
+    formState: { errors },
   } = useForm();
 
   const history = useNavigate();
-  // eslint-disable-next-line
+
   const onSubmit = (data: any) => {
     if (data.password !== data.passwordConfirm) {
       setError("passwordConfirm", {

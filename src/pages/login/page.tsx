@@ -7,7 +7,11 @@ function LoginPage() {
   const {
     register,
     handleSubmit,
+<<<<<<< HEAD
     // formState: { errors },
+=======
+    formState: { errors },
+>>>>>>> parent of 2e1ab61 (eslint formatting)
   } = useForm();
 
   return (
