@@ -7,7 +7,7 @@ function LoginPage() {
   const {
     register,
     handleSubmit,
-    // formState: { errors },s
+    // formState: { errors },
   } = useForm();
 
   return (
