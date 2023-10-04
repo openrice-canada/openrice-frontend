@@ -6,7 +6,7 @@ import TextInput from "../../components/Input/TextInput";
 function LoginPage() {
   const {
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
     control,
   } = useForm();
 
