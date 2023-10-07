@@ -1,3 +1,5 @@
+import React from 'react'
+
 const Header = () => {
   return (
     <div className='w-full flex justify-between px-4 h-16 bg-[#FFFFFF]'>
