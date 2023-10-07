@@ -1,12 +1,9 @@
-import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import TextInput from "../../components/Input/TextInput";
 
 const SignUpPage = () => {
   const {
     handleSubmit,
-    // formState: { errors },
     control,
   } = useForm();
 
