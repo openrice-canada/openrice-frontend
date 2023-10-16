@@ -20,6 +20,6 @@ const router = createBrowserRouter([
     element: <LoginPage />,
     errorElement: <ErrorPage />,
   }
-]);
+],{ basename: process.env.PUBLIC_URL });
 
 export default router;
