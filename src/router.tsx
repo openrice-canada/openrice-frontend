@@ -1,25 +1,33 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import SignUpPage from "./pages/sign-up/page";
 import LoginPage from "./pages/login/page";
 import ErrorPage from "./pages/error/Error";
+import { HomePage } from "./pages/HomePage";
+import SignUpPage from "./pages/signUp/page";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/sign-up",
-    element: <SignUpPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-    errorElement: <ErrorPage />,
-  }
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <App />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          index: true,
+          element: <HomePage />,
+        },
+        {
+          path: "/sign-up",
+          element: <SignUpPage />,
+        },
+        {
+          path: "/login",
+          element: <LoginPage />,
+        },
+      ],
+    },
+  ],
+  { basename: process.env.PUBLIC_URL }
+);
 
 export default router;
