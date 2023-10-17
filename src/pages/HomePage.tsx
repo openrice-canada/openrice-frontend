@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import SearchInput from "../components/Input/SearchInput";
 import { getRestaurantList } from "../api/restaurant";
 import { Restaurant } from "../api/restaurant/type";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export function HomePage(): JSX.Element {
   const { control, handleSubmit } = useForm();
-  const [restaurantList, setRestaurantList] = React.useState<Restaurant[]>([]);
+  const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
 
   const fetchRestaurantList = async () => {
     const data = await getRestaurantList();
@@ -46,13 +47,13 @@ export function HomePage(): JSX.Element {
           />
         </div>
       </form>
-
       <div className="max-w-6xl mx-auto px-4 my-4">
         <h1 className="text-center font-bold text-2xl">Latest Restaurants</h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {restaurantList.map((restaurant) => (
             <div key={restaurant.restaurantId}>{restaurant.name}</div>
           ))}
+          <Link to="/review" state={restaurantList}><button>link</button></Link>
         </div>
       </div>
     </div>
