@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Map, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -30,9 +30,9 @@ function MapComponent({ coordinates }: MapComponentProps) {
       scrollZoom={true}
     >
       {
-        coordinates.map((coordinate) => (
+        coordinates.map((coordinate,index) => (
           <Marker
-            key={coordinate.name}
+            key={index}
             latitude={coordinate.latitude}
             longitude={coordinate.longitude}
           >
