@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import LoginPage from "./pages/login/page";
-import ErrorPage from "./pages/error/Error";
-import { HomePage } from "./pages/HomePage";
-import SignUpPage from "./pages/signUp/page";
+import LoginPage from "./pages/login/LoginPage";
+import ErrorPage from "./pages/error/ErrorPage";
+import HomePage from "./pages/home/HomePage";
+import SignUpPage from "./pages/signUp/SignUpPage";
 import MapPage from "./pages/map/MapPage";
 
 const router = createBrowserRouter(
@@ -26,9 +26,9 @@ const router = createBrowserRouter(
           element: <LoginPage />,
         },
         {
-          path: '/map',
+          path: "/map",
           element: <MapPage />,
-        }
+        },
       ],
     },
   ],

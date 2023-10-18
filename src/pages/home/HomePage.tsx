@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
-import SearchInput from "../components/Input/SearchInput";
-import { getRestaurantList } from "../api/restaurant";
-import { Restaurant } from "../api/restaurant/type";
+import SearchInput from "../../components/Input/SearchInput";
+import { getRestaurantList } from "../../api/restaurant";
+import { Restaurant } from "../../api/restaurant/type";
 
-export function HomePage(): JSX.Element {
+export default function HomePage(): JSX.Element {
   const { control, handleSubmit } = useForm();
   const [restaurantList, setRestaurantList] = React.useState<Restaurant[]>([]);
 

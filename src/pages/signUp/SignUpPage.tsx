@@ -1,11 +1,8 @@
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller } from "react-hook-form";
 import TextInput from "../../components/Input/TextInput";
 
 const SignUpPage = () => {
-  const {
-    handleSubmit,
-    control,
-  } = useForm();
+  const { handleSubmit, control } = useForm();
 
   return (
     <form
@@ -14,7 +11,8 @@ const SignUpPage = () => {
     >
       <p className="text-3xl font-bold">Sign up for Openrice</p>
       <p>
-      By continuing, you agree to Openrice’s Terms of Service and acknowledge Openrice’s Privacy Policy.
+        By continuing, you agree to Openrice’s Terms of Service and acknowledge
+        Openrice’s Privacy Policy.
       </p>
       <Controller
         name="email"
@@ -76,7 +74,6 @@ const SignUpPage = () => {
       </button>
     </form>
   );
-}
-
+};
 
 export default SignUpPage;
