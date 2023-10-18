@@ -1,6 +1,6 @@
 {
   "name": "openrice-frontend",
-  "homepage": "https://openricecan.netlify.app/",
+  "homepage": "https://openricecan.netlify.app/openrice-can",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
