@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Map, { Marker } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from "mapbox-gl";
 
 type MapComponentProps = {
   coordinates: {
@@ -20,7 +21,7 @@ function MapComponent({ coordinates }: MapComponentProps) {
   return (
     <Map
       {...viewport}
-      mapLib={import('mapbox-gl')}
+      mapLib={mapboxgl}
       mapStyle="mapbox://styles/mapbox/streets-v11"
       mapboxAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
       style={{width: '100vw', height: '100vh'}}
