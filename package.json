@@ -30,7 +30,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "BROWSER=none PORT=3865 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "react-scripts test",
