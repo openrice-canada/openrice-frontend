@@ -1,6 +1,7 @@
 export type Restaurant = {
     address: string;
-    coordinate: string;
+    latitude: string;
+    longitude: string;
     createdAt: string;
     districtId: string;
     intro: string;

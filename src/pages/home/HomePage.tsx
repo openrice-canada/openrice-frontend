@@ -1,11 +1,11 @@
 import { useForm, Controller } from "react-hook-form";
-import SearchInput from "../components/Input/SearchInput";
-import { getRestaurantList } from "../api/restaurant";
-import { Restaurant } from "../api/restaurant/type";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import SearchInput from "../../components/Input/SearchInput";
+import { getRestaurantList } from "../../api/restaurant";
+import { Restaurant } from "../../api/restaurant/type";
 
-export function HomePage(): JSX.Element {
+export default function HomePage(): JSX.Element {
   const { control, handleSubmit } = useForm();
   const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
 
