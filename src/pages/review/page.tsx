@@ -1,21 +1,22 @@
 import { useLocation } from "react-router-dom";
-import { getRestaurantList } from "../../api/restaurant";
-import { Restaurant } from "../../api/restaurant/type";
-import { HomePage } from "../../pages/HomePage";
 
 function ReviewPage() {
-    const {state} = useLocation();
+    const { state } = useLocation();
     console.log(state);
-    return(
-        <div className="max-w-6xl mx-auto px-4 my-4">
-            <h1 className="text-center font-bold text-2xl">Latest Restaurants</h1>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {state.map((restaurant:Restaurant) => (
-                <div key={restaurant.restaurantId}>{restaurant.name}</div>
-            ))}
+    const chosenRestaurant = state[0]; // should be updated to retrieve the chosen restaurant in the home page.
+
+    return (
+        <div className="max-w-6xl mx-auto px-4 my-8">
+            <h1 className="text-center font-bold text-2xl my-20">{chosenRestaurant.name}</h1>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mx-auto"> {/* Add mx-auto here */}
+                {chosenRestaurant && (
+                    <div key={chosenRestaurant.restaurantId} className="text-center">
+                        <p className="">{chosenRestaurant.intro}</p>
+                    </div>
+                )}
             </div>
         </div>
-    )
+    );
 }
 
 export default ReviewPage;

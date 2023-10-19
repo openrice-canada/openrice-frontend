@@ -5,6 +5,7 @@ import ErrorPage from "./pages/error/Error";
 import { HomePage } from "./pages/HomePage";
 import SignUpPage from "./pages/signUp/page";
 import ReviewPage from "./pages/review/page";
+import UserInput from "./pages/review/userinput";
 
 const router = createBrowserRouter(
   [
@@ -28,6 +29,10 @@ const router = createBrowserRouter(
         {
           path: "/review",
           element: <ReviewPage />,
+        },
+        {
+          path: "/userinput",
+          element: <UserInput />,
         },
       ],
     },
