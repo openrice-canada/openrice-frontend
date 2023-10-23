@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -8,15 +7,15 @@ import { Restaurant } from "../../api/restaurant/RestaurantType";
 
 export default function HomePage(): JSX.Element {
   const { control, handleSubmit } = useForm();
-  // const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
+  const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
 
-  // const fetchRestaurantList = async () => {
-  //   const data = await getRestaurantList();
-  //   setRestaurantList(data);
-  // };
+  const fetchRestaurantList = async () => {
+    const data = await getRestaurantList();
+    setRestaurantList(data);
+  };
 
   useEffect(() => {
-    // fetchRestaurantList();
+    fetchRestaurantList();
   }, []);
 
   return (
