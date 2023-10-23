@@ -1,6 +1,6 @@
 {
   "name": "openrice-frontend",
-  "homepage": "https://openricecan.netlify.app/",
+  "homepage": "https://github.cantek-openrice.io/openrice-can-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -30,7 +30,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "BROWSER=NONE PORT=3865 react-scripts start",
+    "start": "BROWSER=NONE PORT=3870 react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "react-scripts test",
