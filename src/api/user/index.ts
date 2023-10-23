@@ -1,9 +1,7 @@
 import { AxiosApiClientBuilder } from "..";
-import { User } from "./type";
+import { User } from "./UserType";
 
-const apiClient = new AxiosApiClientBuilder()
-  .withResourceName("/user")
-  .build();
+const apiClient = new AxiosApiClientBuilder().withResourceName("/user").build();
 
 export const getUserList = async (): Promise<User[]> => {
   return apiClient.get("");

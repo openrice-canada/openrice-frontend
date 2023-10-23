@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchInput from "../../components/Input/SearchInput";
 import { getRestaurantList } from "../../api/restaurant";
-import { Restaurant } from "../../api/restaurant/type";
+import { Restaurant } from "../../api/restaurant/RestaurantType";
 
 export default function HomePage(): JSX.Element {
   const { control, handleSubmit } = useForm();
@@ -53,7 +53,9 @@ export default function HomePage(): JSX.Element {
           {restaurantList.map((restaurant) => (
             <div key={restaurant.restaurantId}>{restaurant.name}</div>
           ))}
-          <Link to="/review" state={restaurantList}><button>link</button></Link>
+          <Link to="/review" state={restaurantList}>
+            <button>link</button>
+          </Link>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { AxiosApiClientBuilder } from "..";
-import { Restaurant } from "./type";
+import { Restaurant } from "./RestaurantType";
 
 const apiClient = new AxiosApiClientBuilder()
   .withResourceName("/restaurant")

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import MapComponent from "../../components/map/MapComponent";
 import { getRestaurantList } from "../../api/restaurant";
-import { Restaurant } from "../../api/restaurant/type";
+import { Restaurant } from "../../api/restaurant/RestaurantType";
 
 const MapPage = () => {
   const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
@@ -20,9 +20,9 @@ const MapPage = () => {
       coordinates={restaurantList
         .filter((restaurant) => restaurant.latitude && restaurant.longitude)
         .map((restaurant) => ({
-            name: restaurant.name,
-            latitude: parseFloat(restaurant.latitude),
-            longitude: parseFloat(restaurant.longitude),
+          name: restaurant.name,
+          latitude: parseFloat(restaurant.latitude),
+          longitude: parseFloat(restaurant.longitude),
         }))}
     />
   );
