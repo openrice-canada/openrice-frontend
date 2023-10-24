@@ -8,6 +8,8 @@
 # production
 /build
 
+myFavicon.ico
+
 # misc
 .DS_Store
 .env.local
@@ -19,3 +21,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-save.json
