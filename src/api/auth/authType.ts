@@ -4,6 +4,7 @@ export type User = {
 	password: string;
 };
 
-export type Token = {
-    token: string;
+export type AuthenticateResponse = {
+    token?: string;
+    message?: string;
 }
