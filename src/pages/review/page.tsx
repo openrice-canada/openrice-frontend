@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { getUserList } from "../../api/user";
 import { User } from "../../api/user/type";
 
@@ -10,13 +10,13 @@ function ReviewPage() {
 
     const [userList, setUserList] = useState<User[]>([]);
     const fetchUserList = async () => {
-    const data = await getUserList();
-    setUserList(data);
-    console.log(userList);
+        const data = await getUserList();
+        setUserList(data);
+        console.log(userList);
     };
     useEffect(() => {
-    fetchUserList();
-  }, []);
+        fetchUserList();
+    }, []);
 
     return (
         <div className="flex flex-col px-4 my-8">
@@ -37,12 +37,13 @@ function ReviewPage() {
                         </div>
                     )}
                 </div>
-                <div className="flex mt-3">
-                {userList.map((user) => (
+                <div className="mt-3">
+                    {userList.map((user) => (
                         <div key={user.userId}>
                             <p>{user.username}</p>
+                            <hr /> {/* Add a horizontal line after each user.username */}
                             <div className="text-center">
-                            <textarea className="border border-black px-3 py-2 rounded-md max-w-xl w-full h-40"></textarea>
+                                <textarea className="border border-black px-3 py-2 rounded-md max-w-xl w-full h-40"></textarea>
                             </div>
                         </div>
                     ))}
