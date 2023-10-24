@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import ReviewPage from "./pages/review/page";
-import UserInput from "./pages/review/userinput";
+import ReviewPage from "./pages/review/ReviewPage";
+import UserInputPage from "./pages/review/UserInputPage";
 import MapPage from "./pages/map/MapPage";
 import LoginPage from "./pages/login/LoginPage";
 import ErrorPage from "./pages/error/ErrorPage";
 import HomePage from "./pages/home/HomePage";
 import SignUpPage from "./pages/signUp/SignUpPage";
+import { OverviewPage } from "./pages/restaurant/overview/OverviewPage";
 
 const router = createBrowserRouter(
   [
@@ -32,12 +33,16 @@ const router = createBrowserRouter(
           element: <ReviewPage />,
         },
         {
-          path: "/userinput",
-          element: <UserInput />,
+          path: "/user-input",
+          element: <UserInputPage />,
         },
         {
           path: "/map",
           element: <MapPage />,
+        },
+        {
+          path: "/restaurant/:id",
+          element: <OverviewPage />,
         },
       ],
     },

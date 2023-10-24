@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { TextareaInput } from "../../components/Input/TextareaInput";
+// import { postRating } from "../../api/review";
+// import { Review } from "../../api/review/ReviewType";
 
 function UserInput() {
   const { handleSubmit, control } = useForm();
@@ -28,15 +31,36 @@ function UserInput() {
     );
   };
 
+  // const submitRating = async (data: Review) => {
+  //   await postRating(data, rating);
+  // };
+
   return (
     <form
       className="h-screen flex flex-col gap-6 justify-center max-w-2xl mx-auto px-4"
-      onSubmit={handleSubmit((data) => console.log(data))}
+      onSubmit={() => {
+        handleSubmit((data) => {
+          console.log(data);
+        });
+        // submitRating(rating);
+      }}
     >
-      <p className="text-3xl font-bold">What is your comment on the restaurant?</p>
-      <textarea
-        className="border border-black px-3 py-2 rounded-md"
-      ></textarea>
+      <p className="text-3xl font-bold">
+        What is your comment on the restaurant?
+      </p>
+      <Controller
+        name="username"
+        control={control}
+        render={({ field }) => (
+          <TextareaInput
+            placeholder=""
+            value={field.value}
+            onChange={field.onChange}
+            className="border border-black px-3 py-2 rounded-md"
+          />
+        )}
+      />
+      {/* <textarea className="border border-black px-3 py-2 rounded-md"></textarea> */}
       <p className="text-3xl font-bold">How would you rate this restaurant?</p>
       {renderStars()}
       <button
