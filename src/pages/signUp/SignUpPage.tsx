@@ -8,9 +8,14 @@ const SignUpPage = () => {
 	const { handleSubmit, control } = useForm();
 
 	const userRegister = async (user: { email: string; username: string; password: string; }) => {
-		const token = await postUserRegister(user);
-		sessionStorage.setItem('jwt', token.token);
-		navigate('/')
+		const token = await postUserRegister(user)
+		if (token.message) {
+			console.error(token.message)
+		} else {
+			sessionStorage.setItem('jwt', token.token||"");
+			navigate("/")
+		}
+
 	};
 
 	return (

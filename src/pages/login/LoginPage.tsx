@@ -13,8 +13,12 @@ function LoginPage() {
 
   const userLogin = async (user: { email: string; password: string; }) => {
     const token = await postUserAuth(user);
-    sessionStorage.setItem('jwt', token.token)
-    navigate('/')
+    if (token.message) {
+			console.error(token.message)
+		} else {
+			sessionStorage.setItem('jwt', token.token||"");
+			navigate("/")
+		}
   }
 
   return (
