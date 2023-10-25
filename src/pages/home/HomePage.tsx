@@ -20,13 +20,13 @@ export default function HomePage(): JSX.Element {
   return (
     <div>
       <form
-        className="relative h-screen flex justify-center items-center"
+        className="relative h-96 flex justify-center items-center"
         onSubmit={handleSubmit((data) => console.log(data))}
       >
         <img
           src={process.env.PUBLIC_URL + "/hero.jpg"}
           alt="hero"
-          className="absolute top-0 left-0 w-full h-full z-[-10] brightness-75"
+          className="absolute top-0 left-0 w-full h-full z-[-10] brightness-75 object-cover"
         />
         <div className="flex flex-col justify-center items-center">
           <h1 className="md:text-6xl text-4xl font-bold text-[#FFFFFF] text-center drop-shadow-xl mb-12">
