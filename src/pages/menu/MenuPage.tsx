@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { getUserList } from "../../api/user";
+import { useEffect, useRef, useState } from "react";
+// import { getUserList } from "../../api/user";
 import { User } from "../../api/user/UserType";
+import useOnClickOutside from "../../components/hooks/useOnClickOutside";
 
 const MenuPage = () => {
   const [popUpOpen, setPopUpOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<string>(""); 
+  const [selectedImage, setSelectedImage] = useState<string>("");
+  const imageRef = useRef<null | HTMLDivElement>(null);
 
   // Function to open the pop-up and set the selected image
   const openPopUp = (image: string) => {
@@ -18,14 +20,17 @@ const MenuPage = () => {
   };
 
   const [userList, setUserList] = useState<User[]>([]);
-  const fetchUserList = async () => {
-    const data = await getUserList();
-    setUserList(data);
-  };
+  // const fetchUserList = async () => {
+  //   const data = await getUserList();
+  //   setUserList(data);
+  // };
 
   useEffect(() => {
-    fetchUserList();
+    setUserList([]);
+    // fetchUserList();
   }, []);
+
+  useOnClickOutside(imageRef, () => setPopUpOpen(false));
 
   return (
     <div>
@@ -35,85 +40,67 @@ const MenuPage = () => {
           src={process.env.PUBLIC_URL + "/menu1.png"}
           alt="menu1"
           className="p-3"
-          onClick={() =>
-            openPopUp(process.env.PUBLIC_URL + "/menu1.png")
-          }
+          onClick={() => openPopUp(process.env.PUBLIC_URL + "/menu1.png")}
         />
         <img
           src={process.env.PUBLIC_URL + "/menu2.png"}
           alt="menu2"
           className="p-3"
-          onClick={() =>
-            openPopUp(process.env.PUBLIC_URL + "/menu2.png")
-          }
+          onClick={() => openPopUp(process.env.PUBLIC_URL + "/menu2.png")}
         />
         <img
           src={process.env.PUBLIC_URL + "/menu1.png"}
           alt="menu1"
           className="p-3"
-          onClick={() =>
-            openPopUp(process.env.PUBLIC_URL + "/menu1.png")
-          }
+          onClick={() => openPopUp(process.env.PUBLIC_URL + "/menu1.png")}
         />
         <img
           src={process.env.PUBLIC_URL + "/menu2.png"}
           alt="menu2"
           className="p-3"
-          onClick={() =>
-            openPopUp(process.env.PUBLIC_URL + "/menu2.png")
-          }
+          onClick={() => openPopUp(process.env.PUBLIC_URL + "/menu2.png")}
         />
         <img
           src={process.env.PUBLIC_URL + "/menu1.png"}
           alt="menu1"
           className="p-3"
-          onClick={() =>
-            openPopUp(process.env.PUBLIC_URL + "/menu1.png")
-          }
+          onClick={() => openPopUp(process.env.PUBLIC_URL + "/menu1.png")}
         />
         <img
           src={process.env.PUBLIC_URL + "/menu2.png"}
           alt="menu2"
           className="p-3"
-          onClick={() =>
-            openPopUp(process.env.PUBLIC_URL + "/menu2.png")
-          }
+          onClick={() => openPopUp(process.env.PUBLIC_URL + "/menu2.png")}
         />
         <img
           src={process.env.PUBLIC_URL + "/menu1.png"}
           alt="menu1"
           className="p-3"
-          onClick={() =>
-            openPopUp(process.env.PUBLIC_URL + "/menu1.png")
-          }
+          onClick={() => openPopUp(process.env.PUBLIC_URL + "/menu1.png")}
         />
         <img
           src={process.env.PUBLIC_URL + "/menu2.png"}
           alt="menu2"
           className="p-3"
-          onClick={() =>
-            openPopUp(process.env.PUBLIC_URL + "/menu2.png")
-          }
+          onClick={() => openPopUp(process.env.PUBLIC_URL + "/menu2.png")}
         />
         <img
           src={process.env.PUBLIC_URL + "/menu1.png"}
           alt="menu1"
           className="p-3"
-          onClick={() =>
-            openPopUp(process.env.PUBLIC_URL + "/menu1.png")
-          }
+          onClick={() => openPopUp(process.env.PUBLIC_URL + "/menu1.png")}
         />
         <img
           src={process.env.PUBLIC_URL + "/menu2.png"}
           alt="menu2"
           className="p-3"
-          onClick={() =>
-            openPopUp(process.env.PUBLIC_URL + "/menu2.png")
-          }
+          onClick={() => openPopUp(process.env.PUBLIC_URL + "/menu2.png")}
         />
       </div>
       <div className="flex mt-3">
-          {userList.map((user) => (
+        {userList &&
+          userList.length > 0 &&
+          userList.map((user) => (
             <div key={user.userId}>
               <p>{user.username}</p>
               <div className="text-center">
@@ -121,18 +108,20 @@ const MenuPage = () => {
               </div>
             </div>
           ))}
-        </div>
+      </div>
 
       {/* Pop-up container */}
       {popUpOpen && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-70">
-          <div className="bg-white p-4">
+          <div className="bg-white p-4" ref={imageRef}>
             <img
               src={selectedImage}
               alt="popup"
               className="max-w-full max-h-96"
             />
-            <button onClick={closePopUp} className="translate-x-96">Close</button>
+            <button onClick={closePopUp} className="translate-x-96">
+              Close
+            </button>
           </div>
         </div>
       )}
