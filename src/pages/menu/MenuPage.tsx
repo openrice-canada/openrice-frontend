@@ -8,17 +8,6 @@ const MenuPage = () => {
   const [selectedImage, setSelectedImage] = useState<string>("");
   const imageRef = useRef<null | HTMLDivElement>(null);
 
-  // Function to open the pop-up and set the selected image
-  const openPopUp = (image: string) => {
-    setSelectedImage(image);
-    setPopUpOpen(true);
-  };
-
-  // Function to close the pop-up
-  const closePopUp = () => {
-    setPopUpOpen(false);
-  };
-
   const [userList, setUserList] = useState<User[]>([]);
   // const fetchUserList = async () => {
   //   const data = await getUserList();
@@ -30,6 +19,16 @@ const MenuPage = () => {
     // fetchUserList();
   }, []);
 
+  // Function to open the pop-up and set the selected image
+  const openPopUp = (image: string) => {
+    setSelectedImage(image);
+    setPopUpOpen(true);
+  };
+
+  // Function to close the pop-up
+  const closePopUp = () => {
+    setPopUpOpen(false);
+  };
   useOnClickOutside(imageRef, () => setPopUpOpen(false));
 
   return (
