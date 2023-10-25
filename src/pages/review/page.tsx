@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getUserList } from "../../api/user";
-import { User } from "../../api/user/type";
+import { User } from "../../api/user/UserType";
 
 function ReviewPage() {
     const { state } = useLocation();
