@@ -14,7 +14,7 @@ export function OverviewPage(): JSX.Element {
       setRestaurantDetail(data);
     };
     fetchRestaurantDetail();
-  }, []);
+  }, [id]);
 
   return (
     <div className="max-w-5xl mx-auto">

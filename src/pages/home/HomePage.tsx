@@ -1,6 +1,5 @@
 import { useForm, Controller } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import SearchInput from "../../components/Input/SearchInput";
 import { getRestaurantList } from "../../api/restaurant";
 import { Restaurant } from "../../api/restaurant/RestaurantType";
