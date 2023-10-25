@@ -35,7 +35,7 @@ const MenuPage = () => {
           src={process.env.PUBLIC_URL + "/menu1.png"}
           alt="menu1"
           className="p-3"
-          onClick={(e: React.MouseEvent<HTMLImageElement>) =>
+          onClick={() =>
             openPopUp(process.env.PUBLIC_URL + "/menu1.png")
           }
         />
@@ -43,7 +43,7 @@ const MenuPage = () => {
           src={process.env.PUBLIC_URL + "/menu2.png"}
           alt="menu2"
           className="p-3"
-          onClick={(e: React.MouseEvent<HTMLImageElement>) =>
+          onClick={() =>
             openPopUp(process.env.PUBLIC_URL + "/menu2.png")
           }
         />
@@ -51,7 +51,7 @@ const MenuPage = () => {
           src={process.env.PUBLIC_URL + "/menu1.png"}
           alt="menu1"
           className="p-3"
-          onClick={(e: React.MouseEvent<HTMLImageElement>) =>
+          onClick={() =>
             openPopUp(process.env.PUBLIC_URL + "/menu1.png")
           }
         />
@@ -59,7 +59,7 @@ const MenuPage = () => {
           src={process.env.PUBLIC_URL + "/menu2.png"}
           alt="menu2"
           className="p-3"
-          onClick={(e: React.MouseEvent<HTMLImageElement>) =>
+          onClick={() =>
             openPopUp(process.env.PUBLIC_URL + "/menu2.png")
           }
         />
@@ -67,7 +67,7 @@ const MenuPage = () => {
           src={process.env.PUBLIC_URL + "/menu1.png"}
           alt="menu1"
           className="p-3"
-          onClick={(e: React.MouseEvent<HTMLImageElement>) =>
+          onClick={() =>
             openPopUp(process.env.PUBLIC_URL + "/menu1.png")
           }
         />
@@ -75,7 +75,7 @@ const MenuPage = () => {
           src={process.env.PUBLIC_URL + "/menu2.png"}
           alt="menu2"
           className="p-3"
-          onClick={(e: React.MouseEvent<HTMLImageElement>) =>
+          onClick={() =>
             openPopUp(process.env.PUBLIC_URL + "/menu2.png")
           }
         />
@@ -83,7 +83,7 @@ const MenuPage = () => {
           src={process.env.PUBLIC_URL + "/menu1.png"}
           alt="menu1"
           className="p-3"
-          onClick={(e: React.MouseEvent<HTMLImageElement>) =>
+          onClick={() =>
             openPopUp(process.env.PUBLIC_URL + "/menu1.png")
           }
         />
@@ -91,7 +91,7 @@ const MenuPage = () => {
           src={process.env.PUBLIC_URL + "/menu2.png"}
           alt="menu2"
           className="p-3"
-          onClick={(e: React.MouseEvent<HTMLImageElement>) =>
+          onClick={() =>
             openPopUp(process.env.PUBLIC_URL + "/menu2.png")
           }
         />
@@ -99,7 +99,7 @@ const MenuPage = () => {
           src={process.env.PUBLIC_URL + "/menu1.png"}
           alt="menu1"
           className="p-3"
-          onClick={(e: React.MouseEvent<HTMLImageElement>) =>
+          onClick={() =>
             openPopUp(process.env.PUBLIC_URL + "/menu1.png")
           }
         />
@@ -107,7 +107,7 @@ const MenuPage = () => {
           src={process.env.PUBLIC_URL + "/menu2.png"}
           alt="menu2"
           className="p-3"
-          onClick={(e: React.MouseEvent<HTMLImageElement>) =>
+          onClick={() =>
             openPopUp(process.env.PUBLIC_URL + "/menu2.png")
           }
         />
