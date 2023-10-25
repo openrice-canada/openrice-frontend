@@ -1,6 +1,5 @@
 import { useForm, Controller } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import SearchInput from "../../components/Input/SearchInput";
 import { getRestaurantList } from "../../api/restaurant";
 import { Restaurant } from "../../api/restaurant/RestaurantType";
@@ -51,11 +50,8 @@ export default function HomePage(): JSX.Element {
         <h1 className="text-center font-bold text-2xl">Latest Restaurants</h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           {restaurantList.map((restaurant) => (
-            <div key={restaurant.restaurantId}>{restaurant.name}</div>
+            <a href={`restaurant/${restaurant.restaurantId}`} key={restaurant.restaurantId}>{restaurant.name}</a>
           ))}
-          <Link to="/review" state={restaurantList}>
-            <button>link</button>
-          </Link>
         </div>
       </div>
     </div>
