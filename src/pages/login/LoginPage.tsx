@@ -18,6 +18,7 @@ function LoginPage() {
 		} else {
 			sessionStorage.setItem('jwt', token.token||"");
 			navigate("/")
+      navigate(0)
 		}
   }
 
