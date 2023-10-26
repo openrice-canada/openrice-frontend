@@ -1,9 +1,15 @@
 export type Review = {
-  user_id: number;
-  restaurant_id: number;
+  reviewId: string;
+  userId: string;
+  restaurantId: string;
   rating: number;
   title: string;
-  visit_date: string;
+  visitDate: string;
   content: string;
   spending: number;
+  createdAt: string;
+  modifiedAt: string;
+  active: boolean;
+  username: string;
+  restaurantName: string;
 };
