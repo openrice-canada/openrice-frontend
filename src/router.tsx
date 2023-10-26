@@ -7,7 +7,7 @@ import LoginPage from "./pages/login/LoginPage";
 import ErrorPage from "./pages/error/ErrorPage";
 import HomePage from "./pages/home/HomePage";
 import SignUpPage from "./pages/signUp/SignUpPage";
-import { OverviewPage } from "./pages/restaurant/OverviewPage";
+import RestaurantOverviewPage from "./pages/restaurant/RestaurantOverviewPage";
 import MenuPage from "./pages/menu/MenuPage";
 import RestaurantListPage from "./pages/restaurant/RestaurantListPage";
 
@@ -44,7 +44,7 @@ const router = createBrowserRouter(
         },
         {
           path: "/restaurant/:id",
-          element: <OverviewPage />,
+          element: <RestaurantOverviewPage />,
         },
         {
           path: "/restaurant",
