@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Restaurant } from '../../api/restaurant/RestaurantType'
 import SearchInput from '../../components/Input/SearchInput'
 import { Controller, useForm } from 'react-hook-form'
+import RestaurantCard from '../../components/card/RestaurantCard'
 
 const RestaurantListPage = () => {
   const navigate = useNavigate();
@@ -45,13 +46,15 @@ const RestaurantListPage = () => {
           />
         )}
       />
-      {
-        restaurantList.map((restaurant) => (
-          <div key={restaurant.restaurantId}>
-            <h1>{restaurant.name}</h1>
-          </div>
-        ))
-      }
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-6">
+        {
+          restaurantList.map((restaurant) => (
+            <RestaurantCard
+              {...restaurant}
+            />
+          ))
+        }
+      </div>
     </form>
   )
 }

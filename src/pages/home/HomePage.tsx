@@ -4,6 +4,7 @@ import SearchInput from "../../components/Input/SearchInput";
 import { getRestaurantList } from "../../api/restaurant";
 import { Restaurant } from "../../api/restaurant/RestaurantType";
 import { useNavigate } from "react-router-dom";
+import RestaurantCard from "../../components/card/RestaurantCard";
 
 export default function HomePage(): JSX.Element {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ export default function HomePage(): JSX.Element {
   const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
 
   const fetchRestaurantList = async () => {
-    const data = await getRestaurantList({});
+    const data = await getRestaurantList({ limit: 6 });
     setRestaurantList(data);
   };
 
@@ -49,10 +50,12 @@ export default function HomePage(): JSX.Element {
         </div>
       </form>
       <div className="max-w-6xl mx-auto px-4 my-4">
-        <h1 className="text-center font-bold text-2xl">Latest Restaurants</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <h1 className="text-center font-bold text-2xl mb-6">Latest Restaurants</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {restaurantList.map((restaurant) => (
-            <a href={`restaurant/${restaurant.restaurantId}`} key={restaurant.restaurantId}>{restaurant.name}</a>
+            <RestaurantCard
+              {...restaurant}
+            />
           ))}
         </div>
       </div>
