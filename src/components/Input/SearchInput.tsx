@@ -17,7 +17,7 @@ const SearchInput: React.FC<SearchInputProps> = (props) => {
         value={props.value}
         onChange={props.onChange}
       />
-      <button type='button' className='bg-[#000] h-full w-14 flex justify-center items-center rounded-tr-md rounded-br-md'>
+      <button type='submit' className='bg-[#000] h-full w-14 flex justify-center items-center rounded-tr-md rounded-br-md'>
         <IoSearch color='#FFFFFF' />
       </button>
     </div>
