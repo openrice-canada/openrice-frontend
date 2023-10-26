@@ -7,7 +7,7 @@ const MapPage = () => {
   const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
 
   const fetchRestaurantList = async () => {
-    const data = await getRestaurantList();
+    const data = await getRestaurantList({});
     setRestaurantList(data);
   };
 
