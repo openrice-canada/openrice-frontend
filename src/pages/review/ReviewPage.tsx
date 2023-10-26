@@ -9,6 +9,7 @@ function ReviewPage() {
   if (state) {
     chosenRestaurant = state[0];
   }
+
   // const [userList, setUserList] = useState<User[]>([]);
   // const fetchUserList = async () => {
   //   const data = await getUserList();
