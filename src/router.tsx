@@ -7,7 +7,8 @@ import LoginPage from "./pages/login/LoginPage";
 import ErrorPage from "./pages/error/ErrorPage";
 import HomePage from "./pages/home/HomePage";
 import SignUpPage from "./pages/signUp/SignUpPage";
-import { OverviewPage } from "./pages/restaurant/overview/OverviewPage";
+import { OverviewPage } from "./pages/restaurant/OverviewPage";
+import MenuPage from "./pages/menu/MenuPage";
 
 const router = createBrowserRouter(
   [
@@ -29,7 +30,7 @@ const router = createBrowserRouter(
           element: <LoginPage />,
         },
         {
-          path: "/review",
+          path: "/review/:",
           element: <ReviewPage />,
         },
         {
@@ -43,6 +44,10 @@ const router = createBrowserRouter(
         {
           path: "/restaurant/:id",
           element: <OverviewPage />,
+        },
+        {
+          path: "/menu",
+          element: <MenuPage />,
         },
       ],
     },

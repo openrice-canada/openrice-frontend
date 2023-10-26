@@ -10,6 +10,7 @@ export class AxiosApiClientBuilder {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
+        "Authorization": sessionStorage.getItem('jwt') && `Bearer ${sessionStorage.getItem('jwt')}`
       },
     });
   }
