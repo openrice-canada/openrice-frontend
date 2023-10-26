@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import SearchInput from "../../components/Input/SearchInput";
 import { getRestaurantList } from "../../api/restaurant";
 import { Restaurant } from "../../api/restaurant/RestaurantType";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage(): JSX.Element {
+  const navigate = useNavigate();
   const { control, handleSubmit } = useForm();
   const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
 
   const fetchRestaurantList = async () => {
-    const data = await getRestaurantList();
+    const data = await getRestaurantList({});
     setRestaurantList(data);
   };
 
@@ -21,7 +23,7 @@ export default function HomePage(): JSX.Element {
     <div>
       <form
         className="relative h-96 flex justify-center items-center"
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={handleSubmit((data) => navigate(`/restaurant?search=${data.name}`))}
       >
         <img
           src={process.env.PUBLIC_URL + "/hero.jpg"}
@@ -33,7 +35,7 @@ export default function HomePage(): JSX.Element {
             Discovered Restaurant <br />& Delicious Food
           </h1>
           <Controller
-            name="email"
+            name="name"
             control={control}
             render={({ field: { onChange, value } }) => (
               <SearchInput

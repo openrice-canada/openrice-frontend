@@ -1,3 +1,9 @@
+export type SearchRestaurantQuery = {
+  name?: string;
+  limit?: number;
+  offset?: number;
+}
+
 export type Restaurant = {
     address: string;
     latitude: string;
