@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 // import { getUserList } from "../../api/user";
 // import { User } from "../../api/user/UserType";
 
