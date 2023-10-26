@@ -26,4 +26,5 @@ export type Restaurant = {
     phone: string;
     postalCode: string;
     restaurantId: string;
+    coverImageUrl: string;
 };
