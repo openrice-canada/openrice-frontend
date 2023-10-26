@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { getRestaurantList } from '../../api/restaurant'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Restaurant } from '../../api/restaurant/RestaurantType'
@@ -9,20 +9,24 @@ const RestaurantListPage = () => {
   const navigate = useNavigate();
   const [restaurantList, setRestaurantList] = useState<Restaurant[]>([]);
   const [searchParams] = useSearchParams();
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      name: ""
+    }
+  });
   
-  const fetchRestaurants = async () => {
+  const fetchRestaurants = useCallback(async () => {
     const response = await getRestaurantList({
       name: searchParams.get('search') || ""
     })
     setRestaurantList(response)
-  }
+  }, [searchParams])
 
   useEffect(() => {
     fetchRestaurants()
-  }, [])
+  }, [fetchRestaurants])
 
-  const handleSubmitSearch = (data: any) => {
+  const handleSubmitSearch = (data: { name: string }) => {
     navigate(`/restaurant/?search=${data.name}`)
     navigate(0)
   }
