@@ -67,13 +67,10 @@ const RestaurantOverviewPage: React.FC = () => {
       />
       <div className="max-w-5xl mx-auto px-3">
         <div className="flex font-semibold justify-between">
-          <div className="flex gap-8 pr-1">
-            <div className="relative w-[400px] h-auto shrink-0">
+          <div className="flex flex-col lg:flex-row gap-8 pr-1">
+            <div className="relative w-[400px] h-auto shrink-0 rounded-md overflow-hidden">
               <img
-                src={
-                  process.env.PUBLIC_URL +
-                  "/pictures/restaurantTestingImage.jpeg"
-                }
+                src={`${process.env.REACT_APP_IMAGE_PREFIX}/coverImageUrl/${restaurantDetail.restaurantId}.jpg`}
                 alt=""
                 width="object-cover"
               />
@@ -119,12 +116,12 @@ const RestaurantOverviewPage: React.FC = () => {
           <>
             <div className="flex gap-4 items-center my-4">
               <h1 className="text-2xl font-bold">Review</h1>
-              <button
+              {/* <button
                 type="button"
                 className="bg-slate-600 text-white px-2 py-1 rounded-md"
               >
                 Add Review
-              </button>
+              </button> */}
             </div>
             {reviews.length === 0 && <div>No review in this restaurant</div>}
             {reviews.length > 0 && (

@@ -1,6 +1,9 @@
 import {Link} from "react-router-dom";
+import { UserContext } from "../../App";
+import { useContext } from "react";
 
 const Header = () => {
+  const context = useContext(UserContext);
   const userLogout = () => {
     sessionStorage.removeItem('jwt')
     window.location.reload();
@@ -15,7 +18,8 @@ const Header = () => {
         sessionStorage.getItem('jwt')
         ?
         <button type='button' onClick={userLogout} className='flex items-center gap-1'>
-          <h1 className='text-lg font-bold'>Logout</h1>
+          {context?.userInfo?.username}
+          <h1 className='text-md font-bold'>Logout</h1>
         </button>
         :
         <div className='flex items-center gap-4'>
