@@ -1,9 +1,11 @@
 type NumberInputProps = {
     label: string;
     placeholder: string;
-    value: string;
+    value: number;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     step: string;
+    min?: number;
+    max?: number;
   };
   
   const TextInput = ({
@@ -12,6 +14,8 @@ type NumberInputProps = {
     value,
     onChange,
     step,
+    min,
+    max,
   }: NumberInputProps) => {
     return (
       <div className="flex flex-col">
@@ -23,6 +27,8 @@ type NumberInputProps = {
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          min={min}
+          max={max}
         />
       </div>
     );
