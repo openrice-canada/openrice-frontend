@@ -75,7 +75,7 @@ const RestaurantOverviewPage: React.FC = () => {
   useOnClickOutside(formRef, () => setIsShownAddReviewModal(false));
 
   const buttons = ["Reviews", "Photos", "Menus"];
-  if (!restaurantDetail) return null;
+  // if (!restaurantDetail) return null;
 
   return (
     <>
@@ -88,11 +88,13 @@ const RestaurantOverviewPage: React.FC = () => {
         <div className="flex font-semibold justify-between">
           <div className="flex flex-col lg:flex-row gap-8 pr-1">
             <div className="relative w-[400px] h-auto shrink-0 rounded-md overflow-hidden">
-              <img
-                src={`${process.env.REACT_APP_IMAGE_PREFIX}/coverImageUrl/${restaurantDetail.restaurantId}.jpg`}
-                alt=""
-                width="object-cover"
-              />
+              {restaurantDetail && (
+                <img
+                  src={`${process.env.REACT_APP_IMAGE_PREFIX}/coverImageUrl/${restaurantDetail.restaurantId}.jpg`}
+                  alt=""
+                  width="object-cover"
+                />
+              )}
             </div>
             {!restaurantDetail ? (
               <RestaurantDetailSkeletonLoader />

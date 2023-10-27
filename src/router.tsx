@@ -10,6 +10,7 @@ import SignUpPage from "./pages/signUp/SignUpPage";
 import RestaurantOverviewPage from "./pages/restaurant/RestaurantOverviewPage";
 import MenuPage from "./pages/menu/MenuPage";
 import RestaurantListPage from "./pages/restaurant/RestaurantListPage";
+import NewRestaurantPage from "./pages/restaurant/NewRestaurantPage";
 
 const router = createBrowserRouter(
   [
@@ -53,6 +54,10 @@ const router = createBrowserRouter(
         {
           path: "/menu",
           element: <MenuPage />,
+        },
+        {
+          path: "/new-restaurant",
+          element: <NewRestaurantPage />,
         },
       ],
     },
