@@ -60,11 +60,10 @@ const RestaurantOverviewPage: React.FC = () => {
       <div className="max-w-5xl mx-auto px-3">
         <div className="flex font-semibold justify-between">
           <div className="flex gap-8 pr-1">
-            <div className="relative w-[400px] h-auto shrink-0">
+            <div className="relative w-[400px] h-auto shrink-0 rounded-md overflow-hidden">
               <img
                 src={
-                  process.env.PUBLIC_URL +
-                  "/pictures/restaurantTestingImage.jpeg"
+                  `${process.env.REACT_APP_IMAGE_PREFIX}/coverImageUrl/${restaurantDetail.restaurantId}.jpg`
                 }
                 alt=""
                 width="object-cover"
