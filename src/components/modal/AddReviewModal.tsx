@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller, useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 import TextInput from "../Input/TextInput";
@@ -6,6 +7,8 @@ import { useContext } from "react";
 import { UserContext } from "../../App";
 import { TextareaInput } from "../Input/TextareaInput";
 import { useNavigate } from "react-router-dom";
+import FileInput from "../Input/FIleInput";
+import { uploadImage } from "../../utils/imageService";
 import NumberInput from "../Input/NumberInput";
 import { enqueueSnackbar } from "notistack";
 
@@ -16,13 +19,14 @@ type AddReviewModalProps = {
   restaurantId?: string;
 };
 
-type ReviewForm = {
+export type ReviewForm = {
   rating: number;
   title: string;
   visitDate: string;
   content: string;
   spending: number;
-}
+  photo?: any;
+};
 
 const AddReviewModal: React.FC<AddReviewModalProps> = (
   props: AddReviewModalProps
@@ -31,25 +35,39 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
   const context = useContext(UserContext);
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      title: '',
-      content: '',
+      title: "",
+      content: "",
       spending: 0,
       rating: 0,
-      visitDate: '',
+      visitDate: "",
+      photo: "",
     } as ReviewForm,
   });
 
   const addReview = async (review: ReviewForm) => {
-    await postReview({
-      ...review,
+    const res = await postReview({
+      title: review.title,
+      content: review.content,
+      spending: review.spending,
+      rating: review.rating,
       restaurantId: props?.restaurantId as string,
       userId: context?.userInfo?.userId as string,
       visitDate: new Date(review.visitDate),
     });
+    // console.log(res);
+    // console.log(review.photo);
+    await uploadImage(
+      review.photo,
+      props?.restaurantId as string,
+      "reviews",
+      res.reviewId
+    );
+    // navigate(`/restaurant/${props?.restaurantId}`);
+    // navigate(0);
     enqueueSnackbar("Review added successfully!", { variant: "success" });
     setTimeout(() => {
-      navigate(`/restaurant/${props?.restaurantId}`)
-      navigate(0)
+      navigate(`/restaurant/${props?.restaurantId}`);
+      navigate(0);
     }, 1000);
   };
 
@@ -109,14 +127,14 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
               />
               <Controller
                 control={control}
-                name='rating'
+                name="rating"
                 render={({ field }) => (
                   <NumberInput
-                    label='Rating'
-                    step='1'
-                    placeholder='Rating from 1 to 5'
+                    label="Rating"
+                    step="1"
                     value={field.value}
                     onChange={field.onChange}
+                    placeholder="rating from 1 to 5"
                     min={1}
                     max={5}
                   />
@@ -124,12 +142,12 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
               />
               <Controller
                 control={control}
-                name='spending'
+                name="spending"
                 render={({ field }) => (
                   <NumberInput
-                    label='Spending'
-                    step='10'
-                    placeholder='How much did you spend?'
+                    label="Spending"
+                    step="10"
+                    placeholder="How much did you spend?"
                     value={field.value}
                     onChange={field.onChange}
                     min={0}
@@ -139,14 +157,34 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
               />
               <Controller
                 control={control}
-                name='visitDate'
+                name="visitDate"
                 render={({ field }) => (
                   <TextInput
                     value={field.value}
                     onChange={field.onChange}
-                    label='Visit Date'
-                    type='date'
-                    placeholder=''
+                    label="Visit Date"
+                    type="date"
+                    placeholder=""
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name="photo"
+                render={({ field }) => (
+                  <FileInput
+                    // value={field.value}
+                    onChange={(e) => {
+                      if (e.target.files) {
+                        const selectedFile = e.target.files[0];
+                        field.onChange(selectedFile);
+                        2;
+                      }
+                    }}
+                    label="Visit Date"
+                    type="file"
+                    className="form-control"
+                    placeholder=""
                   />
                 )}
               />
