@@ -11,12 +11,12 @@ import { format } from "date-fns";
 
 type ReviewCardProps = Review;
 
-const ReviewRow = ({ text, icon }: { text: string, icon: React.ReactNode }) => (
-  <div className='flex gap-2 items-center'>
-          <div>{icon}</div>
-          <h1 className='text-sm truncate'>{text}</h1>
+const ReviewRow = ({ text, icon }: { text: string; icon: React.ReactNode }) => (
+  <div className="flex gap-2 items-center">
+    <div>{icon}</div>
+    <h1 className="text-sm truncate">{text}</h1>
   </div>
-)
+);
 
 const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
   return (
@@ -27,8 +27,10 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         <ReviewRow text={props.createdAt} icon={<IoTime />} />
         <div className="flex gap-2 items-start">
           <div>{<IoThumbsUpSharp />}</div>
-          {Array.from({ length: props.rating }).map(() => (
-            <span className="text-yellow-400">{<IoStar />}</span>
+          {Array.from({ length: props.rating }).map((_, index) => (
+            <span className="text-yellow-400" key={index}>
+              {<IoStar />}
+            </span>
           ))}
         </div>
         <ReviewRow

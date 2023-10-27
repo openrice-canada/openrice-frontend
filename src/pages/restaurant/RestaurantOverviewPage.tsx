@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getRestaurantDetail } from "../../api/restaurant";
 import { Restaurant } from "../../api/restaurant/RestaurantType";
@@ -9,6 +9,8 @@ import { Review } from "../../api/review/ReviewType";
 import { getReviewListByRestaurantId } from "../../api/review";
 import AddReviewModal from "../../components/modal/AddReviewModal";
 import RestaurantDetailSkeletonLoader from "../../components/loader/RestaurantDetailSkeletonLoader";
+import PhotoModal from "../../components/modal/PhotoModal";
+import useOnClickOutside from "../../components/hooks/useOnClickOutside";
 
 function isUUID(id: string) {
   const uuidPattern =
@@ -24,6 +26,9 @@ const RestaurantOverviewPage: React.FC = () => {
   const [isShownAddReviewModal, setIsShownAddReviewModal] = useState(false);
   const [photos, setPhotos] = useState<string[]>([]);
   const [menus, setMenus] = useState<string[]>([]);
+  const [popUpOpen, setPopUpOpen] = useState(false);
+  const imageRef = useRef<null | HTMLDivElement>(null);
+  const [selectedImage, setSelectedImage] = useState<string>("");
 
   useEffect(() => {
     const fetchRestaurantDetail = async () => {
@@ -45,16 +50,25 @@ const RestaurantOverviewPage: React.FC = () => {
     setPhotos(
       reviews.map(
         (review) =>
-          `${process.env.REACT_APP_IMAGE_PREFIX}/reviews/${id}/${review.reviewId}`
+          `${process.env.REACT_APP_IMAGE_PREFIX}/reviews/${id}/${review.reviewId}.jpg`
       )
     );
     setMenus(
       reviews.map(
         (review) =>
-          `${process.env.REACT_APP_IMAGE_PREFIX}/menus/${id}/${review.reviewId}`
+          `${process.env.REACT_APP_IMAGE_PREFIX}/menus/${id}/${review.reviewId}.jpg`
       )
     );
   }, [id, reviews]);
+
+  const openPopUp = (image: string) => {
+    setSelectedImage(image);
+    setPopUpOpen(true);
+  };
+  const closePopUp = () => {
+    setPopUpOpen(false);
+  };
+  useOnClickOutside(imageRef, () => setPopUpOpen(false));
 
   const buttons = ["Reviews", "Photos", "Menus"];
   if (!restaurantDetail) return null;
@@ -65,7 +79,7 @@ const RestaurantOverviewPage: React.FC = () => {
         isShown={isShownAddReviewModal}
         setIsShown={setIsShownAddReviewModal}
       />
-      <div className="max-w-5xl mx-auto px-3">
+      <div className="max-w-5xl mx-auto px-3 pt-3">
         <div className="flex font-semibold justify-between">
           <div className="flex flex-col lg:flex-row gap-8 pr-1">
             <div className="relative w-[400px] h-auto shrink-0 rounded-md overflow-hidden">
@@ -140,16 +154,26 @@ const RestaurantOverviewPage: React.FC = () => {
             {photos.length > 0 && (
               <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
                 {photos.map((photo, index) => (
-                  <div className="shadow-md">
+                  <div
+                    className="shadow-md cursor-pointer hover:bg-slate-50"
+                    onClick={() => openPopUp(photo)}
+                    key={`photo${index}`}
+                  >
                     <img
-                      key={`photo${index}`}
                       src={photo}
-                      width="300"
+                      width="350"
                       height="200"
-                      className="object-cover w-[300px] h-auto"
+                      className="object-cover w-full h-auto rounded-lg"
                     />
                   </div>
                 ))}
+                {popUpOpen && (
+                  <PhotoModal
+                    selectedImage={selectedImage}
+                    imageRef={imageRef}
+                    closePopUp={closePopUp}
+                  />
+                )}
               </div>
             )}
           </>
@@ -163,16 +187,26 @@ const RestaurantOverviewPage: React.FC = () => {
             {menus.length > 0 && (
               <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
                 {menus.map((menu, index) => (
-                  <div className="shadow-md">
+                  <div
+                    className="shadow-md cursor-pointer hover:bg-slate-50"
+                    onClick={() => openPopUp(menu)}
+                    key={`menu${index}`}
+                  >
                     <img
-                      key={`menu${index}`}
                       src={menu}
-                      width="300"
+                      width="350"
                       height="200"
-                      className="object-cover w-[300px] h-auto"
+                      className="object-cover w-full h-auto rounded-lg"
                     />
                   </div>
                 ))}
+                {popUpOpen && (
+                  <PhotoModal
+                    selectedImage={selectedImage}
+                    imageRef={imageRef}
+                    closePopUp={closePopUp}
+                  />
+                )}
               </div>
             )}
           </>
