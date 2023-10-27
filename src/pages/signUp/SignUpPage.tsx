@@ -14,6 +14,7 @@ const SignUpPage = () => {
 		} else {
 			sessionStorage.setItem('jwt', token.token||"");
 			navigate("/")
+			navigate(0)
 		}
 
 	};
@@ -65,20 +66,6 @@ const SignUpPage = () => {
 						label='Password'
 						type='password'
 						placeholder='Enter your password'
-						value={field.value}
-						onChange={field.onChange}
-					/>
-				)}
-			/>
-			<Controller
-				name='password'
-				control={control}
-				defaultValue={''}
-				render={({ field }) => (
-					<TextInput
-						label='Confirm Password'
-						type='password'
-						placeholder='Confirm your password'
 						value={field.value}
 						onChange={field.onChange}
 					/>

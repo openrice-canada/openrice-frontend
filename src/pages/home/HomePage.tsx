@@ -24,7 +24,9 @@ export default function HomePage(): JSX.Element {
     <div>
       <form
         className="relative h-96 flex justify-center items-center"
-        onSubmit={handleSubmit((data) => navigate(`/restaurant?search=${data.name}`))}
+        onSubmit={handleSubmit((data) =>
+          navigate(`/restaurant?search=${data.name}`)
+        )}
       >
         <img
           src={process.env.PUBLIC_URL + "/hero.jpg"}
@@ -50,12 +52,20 @@ export default function HomePage(): JSX.Element {
         </div>
       </form>
       <div className="max-w-6xl mx-auto px-4 my-4">
-        <h1 className="text-center font-bold text-2xl mb-6">Latest Restaurants</h1>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-center font-bold text-2xl">
+            Latest Restaurants
+          </h1>
+          <button
+            className="text-slate-600 hover:text-slate-700 font-semibold"
+            onClick={() => navigate("/restaurant")}
+          >
+            View More
+          </button>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {restaurantList.map((restaurant) => (
-            <RestaurantCard
-              {...restaurant}
-            />
+            <RestaurantCard {...restaurant} />
           ))}
         </div>
       </div>

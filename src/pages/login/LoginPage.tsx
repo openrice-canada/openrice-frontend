@@ -2,8 +2,11 @@ import { useForm, Controller } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import TextInput from "../../components/Input/TextInput";
 import { postUserAuth } from "../../api/auth";
+import { useContext } from "react";
+import { UserContext } from "../../App";
 
 function LoginPage() {
+  const context = useContext(UserContext);
   const navigate = useNavigate();
 
   const {
@@ -12,11 +15,14 @@ function LoginPage() {
   } = useForm();
 
   const userLogin = async (user: { email: string; password: string; }) => {
-    const token = await postUserAuth(user);
-    if (token.message) {
-			console.error(token.message)
+    const response = await postUserAuth(user);
+    if (response?.userEntity) {
+      context?.setUserInfo(response.userEntity);
+    }
+    if (response.message) {
+			console.error(response.message)
 		} else {
-			sessionStorage.setItem('jwt', token.token||"");
+			sessionStorage.setItem('jwt', response.token||"");
 			navigate("/")
       navigate(0)
 		}
