@@ -49,7 +49,7 @@ const ReviewPage: React.FC = () => {
 		<div className='container justify-center mb-8 px-4 gap-8 mx-auto mt-10'>
 			<div className='relative'>
 				<img
-					src={`${process.env.REACT_APP_IMAGE_PREFIX}/${review?.restaurantId}.jpg`}
+					src={`${process.env.REACT_APP_IMAGE_PREFIX}/coverImageUrl/${review?.restaurantId}.jpg`}
 					alt='hero'
 					className='w-full h-80 object-cover rounded-lg mb-4 grayscale-[50%]'
 				/>
