@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getRestaurantDetail } from "../../api/restaurant";
 import { Restaurant } from "../../api/restaurant/RestaurantType";
-import { IoBookmarkOutline, IoChatbubbleOutline } from "react-icons/io5";
+import { IoChatbubbleOutline } from "react-icons/io5";
 import RestaurantOverviewButton from "../../components/button/RestaurantOverviewButton";
 import ReviewCard from "../../components/card/ReviewCard";
 import { Review } from "../../api/review/ReviewType";
