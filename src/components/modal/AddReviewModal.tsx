@@ -51,6 +51,7 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
               <Controller
                 control={control}
                 name="title"
+                defaultValue=""
                 render={({ field }) => (
                   <TextInput
                     value={field.value}
@@ -63,7 +64,8 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
               />
               <Controller
                 control={control}
-                name="title"
+                name="content"
+                defaultValue=""
                 render={({ field }) => (
                   <TextInput
                     value={field.value}
