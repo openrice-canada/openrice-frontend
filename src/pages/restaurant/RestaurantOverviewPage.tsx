@@ -70,10 +70,7 @@ const RestaurantOverviewPage: React.FC = () => {
           <div className="flex gap-8 pr-1">
             <div className="relative w-[400px] h-auto shrink-0">
               <img
-                src={
-                  process.env.PUBLIC_URL +
-                  "/pictures/restaurantTestingImage.jpeg"
-                }
+                src={`${process.env.REACT_APP_IMAGE_PREFIX}/${restaurantDetail.restaurantId}.jpg`}
                 alt=""
                 width="object-cover"
               />
