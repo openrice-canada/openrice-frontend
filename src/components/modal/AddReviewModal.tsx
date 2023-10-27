@@ -13,8 +13,7 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
   props: AddReviewModalProps
 ) => {
   const { control } = useForm({
-    defaultValues: {
-    } as Review,
+    defaultValues: {} as Review,
   });
 
   if (!props.isShown) return null;
@@ -38,22 +37,25 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
           {/*body*/}
           <div className="relative p-6 flex flex-col items-center gap-6 overflow-auto">
             <form className="w-full">
-                <Controller
-                    control={control}
-                    name="title"
-                    render={({ field }) => (
-                        <TextInput
-                            {...field}
-                            label="Title"
-                            type="text"
-                            placeholder="Title"
-                        />
-                    )}
-                />
-                <button type='submit' className='bg-slate-600 hover:bg-slate-700 text-white font-bold py-1 px-4 mt-4 rounded'>
-                    Submit
-                </button>
-                </form>
+              <Controller
+                control={control}
+                name="title"
+                render={({ field }) => (
+                  <TextInput
+                    {...field}
+                    label="Title"
+                    type="text"
+                    placeholder="Title"
+                  />
+                )}
+              />
+              <button
+                type="submit"
+                className="bg-slate-600 hover:bg-slate-700 text-white font-bold py-1 px-4 mt-4 rounded"
+              >
+                Submit
+              </button>
+            </form>
           </div>
         </div>
       </div>
