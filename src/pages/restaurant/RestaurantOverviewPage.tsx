@@ -5,7 +5,11 @@ import { getRestaurantDetail } from "../../api/restaurant";
 import { Restaurant } from "../../api/restaurant/RestaurantType";
 import { IoBookmarkOutline, IoChatbubbleOutline } from "react-icons/io5";
 import { OverviewButton } from "../../components/button/OverviewButton";
-import { uploadImage } from "../../components/utils/imageService";
+// import { uploadImage } from "../../utils/imageService";
+import ReviewCard from "../../components/card/ReviewCard";
+import { getReviewListByRestaurantId } from "../../api/review";
+import { Review } from "../../api/review/ReviewType";
+import SkeletonLoader from "../../components/loader/SkeletonLoader";
 
 function isUUID(id: string) {
   const uuidPattern =
@@ -16,8 +20,9 @@ function isUUID(id: string) {
 const RestaurantOverviewPage: React.FC = () => {
   const { id } = useParams();
   const [restaurantDetail, setRestaurantDetail] = useState<Restaurant>();
+  const [reviewList, setReviewList] = useState<Review[]>([]);
   const [page, setPage] = useState("Reviews");
-  const [image, setImage] = useState<null | File>(null);
+  // const [image, setImage] = useState<null | File>(null);
 
   useEffect(() => {
     const fetchRestaurantDetail = async () => {
@@ -28,22 +33,29 @@ const RestaurantOverviewPage: React.FC = () => {
       }
     };
 
+    const fetchRestaurantReview = async () => {
+      if (!id || !isUUID(id)) return;
+      const data = await getReviewListByRestaurantId(id);
+      setReviewList(data);
+    };
+
     fetchRestaurantDetail();
+    fetchRestaurantReview();
   }, [id]);
 
   const buttons = ["Reviews", "Photos", "Menus"];
-  const imageUpload = (e: any) => {
-    e.preventDefault();
-    if (image && id) {
-      uploadImage(image, id);
-    }
-  };
+  // const imageUpload = (e: any) => {
+  //   e.preventDefault();
+  //   if (image && id) {
+  //     uploadImage(image, id);
+  //   }
+  // };
 
   return (
     <div className="max-w-5xl mx-auto px-3">
       <div className="flex font-semibold justify-between">
-        <div className="flex gap-8">
-          <div className="relative w-[400px] h-auto">
+        <div className="flex gap-8 pr-1">
+          <div className="relative w-[400px] h-auto shrink-0">
             <img
               src={
                 process.env.PUBLIC_URL + "/pictures/restaurantTestingImage.jpeg"
@@ -52,14 +64,18 @@ const RestaurantOverviewPage: React.FC = () => {
               width="object-cover"
             />
           </div>
-          <div>
-            <h1 className="text-2xl font-bold">abc{restaurantDetail?.name}</h1>
-            <div>{restaurantDetail?.rating}</div>
-            <div className="text-lg font-semibold">
-              abc {restaurantDetail?.address}
+          {!restaurantDetail ? (
+            <SkeletonLoader />
+          ) : (
+            <div>
+              <h1 className="text-2xl font-bold">{restaurantDetail.name}</h1>
+              <div>{restaurantDetail.rating}</div>
+              <div className="text-lg font-semibold">
+                {restaurantDetail?.address}
+              </div>
+              <div>{restaurantDetail.intro}</div>
             </div>
-            <div>c{restaurantDetail?.intro}</div>
-          </div>
+          )}
         </div>
         <div className="flex gap-4">
           <button className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-200 hover:bg-slate-50">
@@ -84,18 +100,23 @@ const RestaurantOverviewPage: React.FC = () => {
       </div>
       {page === "Reviews" && (
         <>
-          <form onSubmit={imageUpload}>
-            <input
-              type="file"
-              onChange={(e) => {
-                if (e.target.files) {
-                  setImage(e.target.files[0]);
-                }
-              }}
-            />
-            <button name="submit">Submit</button>
-          </form>
-          <div id="imageContainer"></div>
+          <div className="flex gap-4 items-center my-4">
+            <h1 className="text-2xl font-bold">Review</h1>
+            <button
+              type="button"
+              className="bg-slate-600 text-white px-2 py-1 rounded-md"
+            >
+              Add Review
+            </button>
+          </div>
+          {reviewList.length === 0 && <div>No review in this restaurant</div>}
+          {reviewList.length > 0 && (
+            <div className="grid grid-cols-1 gap-4">
+              {reviewList.map((review) => (
+                <ReviewCard {...review} />
+              ))}
+            </div>
+          )}
         </>
       )}
       {page === "Photos" && (
