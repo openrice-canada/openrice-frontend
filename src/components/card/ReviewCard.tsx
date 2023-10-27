@@ -4,7 +4,9 @@ import {
   IoRestaurant,
   IoChatbubbleEllipsesSharp,
   IoTime,
+  IoThumbsUpSharp,
 } from "react-icons/io5";
+import { format } from "date-fns";
 
 type ReviewCardProps = Review;
 
@@ -27,6 +29,19 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         <ReviewRow text={props.title} icon={<IoRestaurant />} />
         <ReviewRow text={props.content} icon={<IoChatbubbleEllipsesSharp />} />
         <ReviewRow text={props.createdAt} icon={<IoTime />} />
+        <div className="flex gap-2 items-start">
+          <div>{<IoThumbsUpSharp />}</div>
+          {Array.from({ length: props.rating }).map(() => (
+            <span className="text-yellow-400">{<IoStar />}</span>
+          ))}
+        </div>
+        <ReviewRow
+          text={
+            "Created at " +
+            format(new Date(props.createdAt), "dd MMM yyyy HH:mm:ss")
+          }
+          icon={<IoTime />}
+        />
       </div>
     </Link>
   );
