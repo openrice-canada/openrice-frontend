@@ -40,6 +40,7 @@ export default function HomePage(): JSX.Element {
           <Controller
             name="name"
             control={control}
+            defaultValue={""}
             render={({ field: { onChange, value } }) => (
               <SearchInput
                 type="text"
@@ -53,9 +54,7 @@ export default function HomePage(): JSX.Element {
       </form>
       <div className="max-w-6xl mx-auto px-4 my-4">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-center font-bold text-2xl">
-            Latest Restaurants
-          </h1>
+          <h1 className="text-center font-bold text-2xl">Latest Restaurants</h1>
           <button
             className="text-slate-600 hover:text-slate-700 font-semibold"
             onClick={() => navigate("/restaurant")}
@@ -65,7 +64,7 @@ export default function HomePage(): JSX.Element {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {restaurantList.map((restaurant) => (
-            <RestaurantCard {...restaurant} />
+            <RestaurantCard {...restaurant} key={restaurant.restaurantId} />
           ))}
         </div>
       </div>
