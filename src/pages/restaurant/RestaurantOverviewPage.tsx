@@ -83,6 +83,7 @@ const RestaurantOverviewPage: React.FC = () => {
         isShown={isShownAddReviewModal}
         setIsShown={setIsShownAddReviewModal}
         formRef={formRef}
+        restaurantId={id}
       />
       <div className="max-w-5xl mx-auto px-3 py-3">
         <div className="flex font-semibold justify-between">

@@ -1,5 +1,5 @@
 import { AxiosApiClientBuilder } from "..";
-import { Review } from "./ReviewType";
+import { CreateReviewRequest, Review } from "./ReviewType";
 
 const apiClient = new AxiosApiClientBuilder()
   .withResourceName("/review")
@@ -15,11 +15,8 @@ export const getReviewListByRestaurantId = async (
   return apiClient.get("", { params: { restaurantId } });
 }
 
-export const postRating = async (
-  review: Review,
-  rating: number
-): Promise<void> => {
-  return apiClient.post("", JSON.stringify({ ...review, rating }));
+export const postReview = async (input: CreateReviewRequest): Promise<void> => {
+  return apiClient.post("", input);
 };
 
 export const getReviewByReviewId = async(
