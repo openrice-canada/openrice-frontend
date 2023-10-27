@@ -1,6 +1,6 @@
 import ContentLoader from "react-content-loader";
 
-const SkeletonLoader = () => (
+const RestaurantDetailSkeletonLoader = () => (
   <ContentLoader
     speed={1}
     width={340}
@@ -16,4 +16,4 @@ const SkeletonLoader = () => (
   </ContentLoader>
 );
 
-export default SkeletonLoader;
+export default RestaurantDetailSkeletonLoader;

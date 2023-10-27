@@ -1,4 +1,4 @@
-export const OverviewButton: React.FC<{
+const RestaurantOverviewButton: React.FC<{
   button: string;
   active: boolean;
   setActive: React.Dispatch<React.SetStateAction<string>>;
@@ -13,3 +13,5 @@ export const OverviewButton: React.FC<{
     </h1>
   );
 };
+
+export default RestaurantOverviewButton;

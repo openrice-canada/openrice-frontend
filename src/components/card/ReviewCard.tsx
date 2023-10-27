@@ -5,6 +5,7 @@ import {
   IoChatbubbleEllipsesSharp,
   IoTime,
   IoThumbsUpSharp,
+  IoStar,
 } from "react-icons/io5";
 import { format } from "date-fns";
 

@@ -16,7 +16,6 @@ const RestaurantCard: React.FC<Restaurant> = (props: Restaurant) => {
     </div>
   );
   return (
-<<<<<<< HEAD
     <Link
       to={`/restaurant/${props.restaurantId}`}
       className="rounded-md shadow-lg"
@@ -38,17 +37,5 @@ const RestaurantCard: React.FC<Restaurant> = (props: Restaurant) => {
     </Link>
   );
 };
-=======
-    <a href={`/restaurant/${props.restaurantId}`} className='rounded-md shadow-lg'>
-        <img src={`${process.env.REACT_APP_IMAGE_PREFIX}/${props.restaurantId}.jpg`} alt={props.name} className='w-full h-48 object-cover rounded-tl-md rounded-tr-md' />
-        <div className='p-4'>
-            <RestaurantRow text={props.name} icon={<IoRestaurant/>} />
-            <RestaurantRow text={props.address} icon={<IoLocation/>} />
-            <RestaurantRow text={props.intro} icon={<IoReorderThree/>} />
-        </div>
-    </a>
-  )
-}
->>>>>>> ed9b805566ab9b6664a3da4568dd49a13e75de03
 
 export default RestaurantCard;
