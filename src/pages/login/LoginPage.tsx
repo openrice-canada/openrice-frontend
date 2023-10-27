@@ -8,7 +8,6 @@ import { UserContext } from "../../App";
 function LoginPage() {
   const context = useContext(UserContext);
   const navigate = useNavigate();
-
   const { handleSubmit, control } = useForm();
 
   const userLogin = async (user: { email: string; password: string }) => {
