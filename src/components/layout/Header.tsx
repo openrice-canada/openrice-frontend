@@ -1,17 +1,37 @@
-import { Link } from 'react-router-dom';
-import { UserContext } from '../../App';
-import { useContext } from 'react';
+import { Link } from "react-router-dom";
+import { UserContext } from "../../App";
+import { useContext, useEffect, useState } from "react";
 
 const Header = () => {
+  const [scrolled, setScrolled] = useState(false);
 	const context = useContext(UserContext);
 	const userLogout = () => {
 		sessionStorage.removeItem('jwt');
 		sessionStorage.removeItem('userInfo');
 		window.location.reload();
 	};
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      if (scrollTop > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
 	return (
-		<div className='fixed top-0 left-0 w-full flex justify-between px-4 h-16 bg-white z-10'>
-			<Link to='/' className='flex items-center gap-1'>
+    <div
+      className={`fixed top-0 left-0 w-full flex justify-between px-4 h-16 bg-gray-100 z-10 ${
+        scrolled && "shadow-lg opacity-90"
+      }`}
+    >			<Link to='/' className='flex items-center gap-1'>
 				<img
 					src={process.env.PUBLIC_URL + '/logo.png'}
 					alt='OpenRice'

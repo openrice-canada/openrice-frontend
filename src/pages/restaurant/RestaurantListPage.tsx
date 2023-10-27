@@ -12,7 +12,7 @@ const RestaurantListPage = () => {
   const [searchParams] = useSearchParams();
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      name: "",
+      name: searchParams.get("search") || "",
     },
   });
 
@@ -40,6 +40,7 @@ const RestaurantListPage = () => {
       <Controller
         name="name"
         control={control}
+        defaultValue={""}
         render={({ field: { value, onChange } }) => (
           <SearchInput
             type="text"
