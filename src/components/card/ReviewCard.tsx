@@ -6,6 +6,7 @@ import {
   IoTime,
   IoThumbsUpSharp,
   IoStar,
+  IoPerson,
 } from "react-icons/io5";
 import { format } from "date-fns";
 
@@ -22,6 +23,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
   return (
     <Link to={`/review/${props.reviewId}`} className="rounded-md shadow-lg">
       <div className="flex flex-col gap-1 px-4 py-6">
+        <ReviewRow text={props.username} icon={<IoPerson />} />
         <ReviewRow text={props.title} icon={<IoRestaurant />} />
         <ReviewRow text={props.content} icon={<IoChatbubbleEllipsesSharp />} />
         <ReviewRow text={props.createdAt} icon={<IoTime />} />
