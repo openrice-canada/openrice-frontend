@@ -13,13 +13,7 @@ const RestaurantCard: React.FC<RestaurantCardProps> = (props: RestaurantCardProp
     )
   return (
     <a href={`/restaurant/${props.restaurantId}`} className='rounded-md shadow-lg'>
-        {
-            props.coverImageUrl
-            ?
-            <img src={props.coverImageUrl} alt={props.name} className='w-full h-48 object-cover rounded-tl-md rounded-tr-md' />
-            :
-            <div className='w-full h-48 bg-gray-300 rounded-tl-md rounded-tr-md' />
-        }
+        <img src={`${process.env.REACT_APP_IMAGE_PREFIX}/${props.restaurantId}.jpg`} alt={props.name} className='w-full h-48 object-cover rounded-tl-md rounded-tr-md' />
         <div className='p-4'>
             <RestaurantRow text={props.name} icon={<IoRestaurant/>} />
             <RestaurantRow text={props.address} icon={<IoLocation/>} />
