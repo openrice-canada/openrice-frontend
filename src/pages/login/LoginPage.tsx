@@ -9,29 +9,32 @@ function LoginPage() {
   const context = useContext(UserContext);
   const navigate = useNavigate();
 
-  const {
-    handleSubmit,
-    control,
-  } = useForm();
+  const { handleSubmit, control } = useForm();
 
-  const userLogin = async (user: { email: string; password: string; }) => {
+  const userLogin = async (user: { email: string; password: string }) => {
     const response = await postUserAuth(user);
-    if (response?.userEntity) {
-      context?.setUserInfo(response.userEntity);
-    }
+    // if (response?.userEntity) {
+    //   context?.setUserInfo(response.userEntity);
+    // }
     if (response.message) {
-			console.error(response.message)
-		} else {
-			sessionStorage.setItem('jwt', response.token||"");
-			navigate("/")
-      navigate(0)
-		}
-  }
+      console.error(response.message);
+    } else {
+      sessionStorage.setItem("jwt", response.token || "");
+      if (response.userEntity) {
+        sessionStorage.setItem("userInfo", JSON.stringify(response.userEntity));
+        context?.setUserInfo(response.userEntity);
+      }
+      navigate("/");
+      navigate(0);
+    }
+  };
 
   return (
     <form
       className="h-screen flex flex-col gap-6 justify-center max-w-sm mx-auto px-4"
-      onSubmit={handleSubmit((user) => userLogin(user as { email: string; password: string; }))}
+      onSubmit={handleSubmit((user) =>
+        userLogin(user as { email: string; password: string })
+      )}
     >
       <p className="text-3xl font-bold">Log in to Openrice</p>
       <p>
@@ -40,7 +43,7 @@ function LoginPage() {
       <Controller
         name="emailOrUsername"
         control={control}
-        defaultValue={''}
+        defaultValue={""}
         render={({ field }) => (
           <TextInput
             label="Email Or Username"
@@ -54,7 +57,7 @@ function LoginPage() {
       <Controller
         name="password"
         control={control}
-        defaultValue={''}
+        defaultValue={""}
         render={({ field }) => (
           <TextInput
             label="Password"
