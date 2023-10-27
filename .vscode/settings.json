@@ -8,5 +8,8 @@
     "Openrice",
     "supabase",
     "tailwindcss"
-  ]
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }
