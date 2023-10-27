@@ -4,6 +4,7 @@ import TextInput from "../../components/Input/TextInput";
 import { postUserAuth } from "../../api/auth";
 import { useContext } from "react";
 import { UserContext } from "../../App";
+import { enqueueSnackbar } from "notistack";
 
 function LoginPage() {
   const context = useContext(UserContext);
@@ -23,8 +24,11 @@ function LoginPage() {
         sessionStorage.setItem("userInfo", JSON.stringify(response.userEntity));
         context?.setUserInfo(response.userEntity);
       }
-      navigate("/");
-      navigate(0);
+      enqueueSnackbar("Login successfully!", { variant: "success" });
+      setTimeout(() => {
+        navigate("/");
+        navigate(0);
+      }, 1000);
     }
   };
 

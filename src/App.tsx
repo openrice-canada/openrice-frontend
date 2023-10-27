@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 import Layout from "./components/layout/Layout";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { UserEntity } from "./api/auth/authType";
+import { SnackbarProvider } from "notistack";
 
 interface UserInfo {
   userInfo: UserEntity | null;
@@ -20,6 +21,7 @@ function App() {
   return (
     <UserContext.Provider value={{ userInfo, setUserInfo }}>
       <Layout>
+        <SnackbarProvider />
         <ScrollRestoration />
         <Outlet />
       </Layout>
