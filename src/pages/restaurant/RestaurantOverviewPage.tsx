@@ -138,6 +138,7 @@ const RestaurantOverviewPage: React.FC = () => {
         )}
         {page === "Photos" && (
           <>
+            <h1 className="text-2xl font-bold my-4">Photos</h1>
             {photos.length === 0 && <div>No photos in this restaurant</div>}
             {photos.length > 0 && (
               <div className="grid grid-cols-1 gap-4">
@@ -158,8 +159,9 @@ const RestaurantOverviewPage: React.FC = () => {
         )}
         {page === "Menus" && (
           <>
+            <h1 className="text-2xl font-bold my-4">Menus</h1>
             {menus.length === 0 && (
-              <div>No menus photos are provided for this restaurant</div>
+              <div>No menu photos are provided for this restaurant</div>
             )}
             {menus.length > 0 && (
               <div className="grid grid-cols-1 gap-4">
