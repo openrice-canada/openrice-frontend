@@ -1,20 +1,52 @@
-import React from "react";
-import { Review } from "../../api/review/ReviewType";
 import { Controller, useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 import TextInput from "../Input/TextInput";
+import { postReview } from "../../api/review";
+import { useContext } from "react";
+import { UserContext } from "../../App";
+import { TextareaInput } from "../Input/TextareaInput";
+import { useNavigate } from "react-router-dom";
 
 type AddReviewModalProps = {
   isShown: boolean;
   setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
+  formRef: React.MutableRefObject<HTMLDivElement | null>;
+  restaurantId?: string;
 };
+
+type ReviewForm = {
+  rating: number;
+  title: string;
+  visitDate: string;
+  content: string;
+  spending: number;
+}
 
 const AddReviewModal: React.FC<AddReviewModalProps> = (
   props: AddReviewModalProps
 ) => {
-  const { control } = useForm({
-    defaultValues: {} as Review,
+  const navigate = useNavigate();
+  const context = useContext(UserContext);
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      title: '',
+      content: '',
+      spending: 0,
+      rating: 0,
+      visitDate: '',
+    } as ReviewForm,
   });
+
+  const addReview = async (review: ReviewForm) => {
+    await postReview({
+      ...review,
+      restaurantId: props?.restaurantId as string,
+      userId: context?.userInfo?.userId as string,
+      visitDate: new Date(review.visitDate),
+    });
+    navigate(`/restaurant/${props?.restaurantId}`)
+    navigate(0)
+  };
 
   if (!props.isShown) return null;
   return (
@@ -22,7 +54,10 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
       <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
       <div className="relative w-1/4 min-w-[400px] my-6 mx-auto z-40">
         {/*content*/}
-        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <div
+          className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none"
+          ref={props.formRef}
+        >
           <div className="flex items-center justify-between p-2 px-4 border-b border-solid border-slate-200 rounded-t">
             <h3 className="text-lg font-semibold">Add Review</h3>
             <button
@@ -36,16 +71,73 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
           </div>
           {/*body*/}
           <div className="relative p-6 flex flex-col items-center gap-6 overflow-auto">
-            <form className="w-full">
+            <form
+              className="w-full gap-2 flex flex-col"
+              onSubmit={handleSubmit((review) => addReview(review))}
+            >
               <Controller
                 control={control}
                 name="title"
                 render={({ field }) => (
                   <TextInput
-                    {...field}
+                    value={field.value}
+                    onChange={field.onChange}
                     label="Title"
                     type="text"
                     placeholder="Title"
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name="content"
+                render={({ field }) => (
+                  <TextareaInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    label="Content"
+                    type="text"
+                    placeholder="Type something"
+                    className="border border-gray-400 rounded-md p-2 text-sm"
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name='rating'
+                render={({ field }) => (
+                  <TextInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    label="Rating"
+                    type='number'
+                    placeholder="rating from 1 to 5"
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name='spending'
+                render={({ field }) => (
+                  <TextInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    label="Spending"
+                    type='number'
+                    placeholder='How much did you spend?'
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name='visitDate'
+                render={({ field }) => (
+                  <TextInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    label='Visit Date'
+                    type='date'
+                    placeholder=''
                   />
                 )}
               />
