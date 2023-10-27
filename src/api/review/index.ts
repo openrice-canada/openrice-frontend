@@ -21,3 +21,9 @@ export const postRating = async (
 ): Promise<void> => {
   return apiClient.post("", JSON.stringify({ ...review, rating }));
 };
+
+export const getReviewByReviewId = async(
+  reviewId: string
+): Promise<Review> => {
+  return apiClient.get(reviewId);
+}
