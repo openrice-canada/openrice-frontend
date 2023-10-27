@@ -2,7 +2,13 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Review } from '../../api/review/ReviewType';
 import { getReviewByReviewId } from '../../api/review';
-import { IoCashOutline, IoPerson, IoStar, IoThumbsUpSharp, IoTime } from 'react-icons/io5';
+import {
+	IoCashOutline,
+	IoPerson,
+	IoStar,
+	IoThumbsUpSharp,
+	IoTime,
+} from 'react-icons/io5';
 import { format } from 'date-fns';
 
 function isUUID(id: string) {
@@ -11,24 +17,16 @@ function isUUID(id: string) {
 	return uuidPattern.test(id);
 }
 
+const ReviewRow = ({ text, icon }: { text: string; icon: React.ReactNode }) => (
+	<div className='my-2 flex gap-2 items-center'>
+		<div>{icon}</div>
+		<h1 className='text-sm truncate'>{text}</h1>
+	</div>
+);
+
 const ReviewPage: React.FC = () => {
 	const { id } = useParams();
 	const [review, setReview] = useState<Review>();
-
-	console.log(review);
-
-	const ReviewRow = ({
-		text,
-		icon,
-	}: {
-		text: string;
-		icon: React.ReactNode;
-	}) => (
-		<div className='my-2 flex gap-2 items-center'>
-			<div>{icon}</div>
-			<h1 className='text-sm truncate'>{text}</h1>
-		</div>
-	);
 	// const [userList, setUserList] = useState<User[]>([]);
 	// const fetchUserList = async () => {
 	//   const data = await getUserList();
@@ -55,7 +53,9 @@ const ReviewPage: React.FC = () => {
 					alt='hero'
 					className='w-full h-80 object-cover rounded-lg mb-4 grayscale-[50%]'
 				/>
-        <p className='absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-5xl font-bold whitespace-nowrap tracking-wide'>{review?.restaurantName}</p>
+				<p className='absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-5xl font-bold whitespace-nowrap tracking-wide'>
+					{review?.restaurantName}
+				</p>
 			</div>
 			<div className='container justify-center mb-8 grid grid-cols-1 gap-8 mx-auto sm:grid-cols-1 md:grid-cols-3 mt-10'>
 				<div className='col-span-2 rounded-md shadow-md'>
@@ -107,10 +107,20 @@ const ReviewPage: React.FC = () => {
 									</span>
 								))}
 							</div>
-              <h5 className='border-b border-orange-500 my-2 text-lg'>Visited Date</h5>
-              <ReviewRow text={format(new Date(review.createdAt), 'dd MMM yyyy')} icon={<IoTime />} />
-              <h5 className='border-b border-orange-500 my-2 text-lg'>Spending</h5>
-              <ReviewRow text={`$${review.spending}`} icon={<IoCashOutline />} />
+							<h5 className='border-b border-orange-500 my-2 text-lg'>
+								Visited Date
+							</h5>
+							<ReviewRow
+								text={format(new Date(review.createdAt), 'dd MMM yyyy')}
+								icon={<IoTime />}
+							/>
+							<h5 className='border-b border-orange-500 my-2 text-lg'>
+								Spending
+							</h5>
+							<ReviewRow
+								text={`$${review.spending}`}
+								icon={<IoCashOutline />}
+							/>
 						</>
 					)}
 				</div>
