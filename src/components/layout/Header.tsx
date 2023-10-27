@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
 import { useContext, useEffect, useState } from "react";
+import { IoCreateOutline, IoLogInOutline, IoLogOutOutline, IoPersonAddOutline } from "react-icons/io5";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -44,7 +45,7 @@ const Header = () => {
 					{context?.userInfo?.username}
 					{context?.userInfo?.role === "ADMIN" && (
 						<Link to='/new-restaurant' className='text-lg font-bold'>
-							New Restaurant
+							<IoCreateOutline />
 						</Link>
 					)}
 					<button
@@ -52,16 +53,16 @@ const Header = () => {
 						onClick={userLogout}
 						className='flex items-center gap-1'
 					>
-						<h1 className='text-lg font-bold'>Logout</h1>
+						<IoLogOutOutline/>
 					</button>
 				</div>
 			) : (
 				<div className='flex items-center gap-4'>
 					<Link to='/sign-up' className='text-lg font-bold'>
-						Sign Up
+						<IoPersonAddOutline />
 					</Link>
 					<Link to='/login' className='text-lg font-bold'>
-						Login
+						<IoLogInOutline />
 					</Link>
 				</div>
 			)}

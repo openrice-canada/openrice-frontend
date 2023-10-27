@@ -2,6 +2,7 @@ import { useForm, Controller } from 'react-hook-form';
 import TextInput from '../../components/Input/TextInput';
 import { postUserRegister } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
+import { enqueueSnackbar } from 'notistack';
 
 const SignUpPage = () => {
 	const navigate = useNavigate();
@@ -9,12 +10,15 @@ const SignUpPage = () => {
 
 	const userRegister = async (user: { email: string; username: string; password: string; }) => {
 		const token = await postUserRegister(user)
+		enqueueSnackbar("Sign up successfully!", { variant: "success" });
 		if (token.message) {
 			console.error(token.message)
 		} else {
-			sessionStorage.setItem('jwt', token.token||"");
-			navigate("/")
-			navigate(0)
+			setTimeout(() => {
+				sessionStorage.setItem('jwt', token.token||"");
+				navigate("/");
+				navigate(0);
+			}, 1000);
 		}
 
 	};

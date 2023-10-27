@@ -9,6 +9,8 @@ import { TextareaInput } from "../Input/TextareaInput";
 import { useNavigate } from "react-router-dom";
 import FileInput from "../Input/FIleInput";
 import { uploadImage } from "../../utils/imageService";
+import NumberInput from "../Input/NumberInput";
+import { enqueueSnackbar } from "notistack";
 
 type AddReviewModalProps = {
   isShown: boolean;
@@ -60,8 +62,13 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
       "reviews",
       res.reviewId
     );
-    navigate(`/restaurant/${props?.restaurantId}`);
-    navigate(0);
+    // navigate(`/restaurant/${props?.restaurantId}`);
+    // navigate(0);
+    enqueueSnackbar("Review added successfully!", { variant: "success" });
+    setTimeout(() => {
+      navigate(`/restaurant/${props?.restaurantId}`);
+      navigate(0);
+    }, 1000);
   };
 
   if (!props.isShown) return null;
@@ -122,12 +129,14 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
                 control={control}
                 name="rating"
                 render={({ field }) => (
-                  <TextInput
+                  <NumberInput
+                    label="Rating"
+                    step="1"
                     value={field.value}
                     onChange={field.onChange}
-                    label="Rating"
-                    type="number"
                     placeholder="rating from 1 to 5"
+                    min={1}
+                    max={5}
                   />
                 )}
               />
@@ -135,12 +144,14 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
                 control={control}
                 name="spending"
                 render={({ field }) => (
-                  <TextInput
+                  <NumberInput
+                    label="Spending"
+                    step="10"
+                    placeholder="How much did you spend?"
                     value={field.value}
                     onChange={field.onChange}
-                    label="Spending"
-                    type="number"
-                    placeholder="How much did you spend?"
+                    min={0}
+                    max={10000}
                   />
                 )}
               />

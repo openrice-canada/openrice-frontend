@@ -10,7 +10,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div>
       <Header />
-      <main className='min-h-screen mt-16'>{children}</main>
+      <main className='min-h-screen mt-20'>{children}</main>
       {/* <Footer /> */}
     </div>
   )
