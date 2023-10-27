@@ -28,6 +28,7 @@ const RestaurantOverviewPage: React.FC = () => {
   const [menus, setMenus] = useState<string[]>([]);
   const [popUpOpen, setPopUpOpen] = useState(false);
   const imageRef = useRef<null | HTMLDivElement>(null);
+  const formRef = useRef<null | HTMLDivElement>(null);
   const [selectedImage, setSelectedImage] = useState<string>("");
 
   useEffect(() => {
@@ -54,10 +55,12 @@ const RestaurantOverviewPage: React.FC = () => {
       )
     );
     setMenus(
-      reviews.map(
-        (review) =>
-          `${process.env.REACT_APP_IMAGE_PREFIX}/menus/${id}/${review.reviewId}.jpg`
-      )
+      reviews
+        .map(
+          (review) =>
+            `${process.env.REACT_APP_IMAGE_PREFIX}/menus/${id}/${review.reviewId}.jpg`
+        )
+        .sort((a, b) => a.localeCompare(b))
     );
   }, [id, reviews]);
 
@@ -69,6 +72,7 @@ const RestaurantOverviewPage: React.FC = () => {
     setPopUpOpen(false);
   };
   useOnClickOutside(imageRef, () => setPopUpOpen(false));
+  useOnClickOutside(formRef, () => setIsShownAddReviewModal(false));
 
   const buttons = ["Reviews", "Photos", "Menus"];
   // if (!restaurantDetail) return null;
@@ -78,8 +82,9 @@ const RestaurantOverviewPage: React.FC = () => {
       <AddReviewModal
         isShown={isShownAddReviewModal}
         setIsShown={setIsShownAddReviewModal}
+        formRef={formRef}
       />
-      <div className="max-w-5xl mx-auto px-3 pt-3">
+      <div className="max-w-5xl mx-auto px-3 py-3">
         <div className="flex font-semibold justify-between">
           <div className="flex flex-col lg:flex-row gap-8 pr-1">
             <div className="relative w-[400px] h-auto shrink-0 rounded-md overflow-hidden">
