@@ -62,6 +62,12 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
       "reviews",
       res.reviewId
     );
+    await uploadImage(
+      review.photo,
+      props?.restaurantId as string,
+      "menus",
+      res.reviewId
+    );
     // navigate(`/restaurant/${props?.restaurantId}`);
     // navigate(0);
     enqueueSnackbar("Review added successfully!", { variant: "success" });
