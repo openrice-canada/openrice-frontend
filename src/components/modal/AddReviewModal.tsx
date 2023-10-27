@@ -1,4 +1,3 @@
-import { CreateReviewRequest, Review } from "../../api/review/ReviewType";
 import { Controller, useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 import TextInput from "../Input/TextInput";
