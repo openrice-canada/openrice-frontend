@@ -138,9 +138,9 @@ const RestaurantOverviewPage: React.FC = () => {
             <h1 className="text-2xl font-bold my-4">Photos</h1>
             {photos.length === 0 && <div>No photos in this restaurant</div>}
             {photos.length > 0 && (
-              <div className="grid grid-cols-1 gap-4">
+              <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
                 {photos.map((photo, index) => (
-                  <div className="grid grid-cols-1 gap-4">
+                  <div className="shadow-md">
                     <img
                       key={`photo${index}`}
                       src={photo}
@@ -161,9 +161,9 @@ const RestaurantOverviewPage: React.FC = () => {
               <div>No menu photos are provided for this restaurant</div>
             )}
             {menus.length > 0 && (
-              <div className="grid grid-cols-1 gap-4">
+              <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
                 {menus.map((menu, index) => (
-                  <div className="grid grid-cols-1 gap-4">
+                  <div className="shadow-md">
                     <img
                       key={`menu${index}`}
                       src={menu}
