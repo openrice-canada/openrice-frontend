@@ -354,7 +354,7 @@ const NewRestaurantPage = () => {
 					type='submit'
 					className='bg-[#000000] px-4 py-2 rounded-md text-[#ffffff] font-bold'
 				>
-					Sign up
+					Add
 				</button>
 			</div>
 		</form>

@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { UserContext } from "../../App";
 import { TextareaInput } from "../Input/TextareaInput";
 import { useNavigate } from "react-router-dom";
+import NumberInput from "../Input/NumberInput";
 
 type AddReviewModalProps = {
   isShown: boolean;
@@ -106,12 +107,14 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
                 control={control}
                 name='rating'
                 render={({ field }) => (
-                  <TextInput
+                  <NumberInput
+                    label='Rating'
+                    step='1'
+                    placeholder='Rating from 1 to 5'
                     value={field.value}
                     onChange={field.onChange}
-                    label="Rating"
-                    type='number'
-                    placeholder="rating from 1 to 5"
+                    min={1}
+                    max={5}
                   />
                 )}
               />
@@ -119,12 +122,14 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
                 control={control}
                 name='spending'
                 render={({ field }) => (
-                  <TextInput
+                  <NumberInput
+                    label='Spending'
+                    step='10'
+                    placeholder='How much did you spend?'
                     value={field.value}
                     onChange={field.onChange}
-                    label="Spending"
-                    type='number'
-                    placeholder='How much did you spend?'
+                    min={0}
+                    max={10000}
                   />
                 )}
               />
