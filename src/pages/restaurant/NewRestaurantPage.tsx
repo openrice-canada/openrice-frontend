@@ -15,6 +15,7 @@ import { PaymentMethod } from '../../api/payment/paymentMethodType';
 import { postRestaurant, postRestaurantDIsh, postRestaurantPaymentMethod } from '../../api/restaurant';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { enqueueSnackbar } from 'notistack';
 
 const NewRestaurantPage = () => {
 	const context = useContext(UserContext);
@@ -81,8 +82,11 @@ const NewRestaurantPage = () => {
         if (res.restaurantId) {
             await postRestaurantDIsh({restaurantId: res.restaurantId, dishId})
             await postRestaurantPaymentMethod({restaurantId: res.restaurantId, paymentMethodId})
-            navigate(`/restaurant/${res.restaurantId}`);
-			navigate(0);
+			enqueueSnackbar("Restaurant added successfully!", { variant: "success" });
+			setTimeout(() => {
+				navigate(`/restaurant/${res.restaurantId}`);
+				navigate(0);
+			}, 1000);
         }
 		// const token = await postUserRegister(restaurant);
 		// if (token.message) {

@@ -7,6 +7,7 @@ import { UserContext } from "../../App";
 import { TextareaInput } from "../Input/TextareaInput";
 import { useNavigate } from "react-router-dom";
 import NumberInput from "../Input/NumberInput";
+import { enqueueSnackbar } from "notistack";
 
 type AddReviewModalProps = {
   isShown: boolean;
@@ -45,8 +46,11 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
       userId: context?.userInfo?.userId as string,
       visitDate: new Date(review.visitDate),
     });
-    navigate(`/restaurant/${props?.restaurantId}`)
-    navigate(0)
+    enqueueSnackbar("Review added successfully!", { variant: "success" });
+    setTimeout(() => {
+      navigate(`/restaurant/${props?.restaurantId}`)
+      navigate(0)
+    }, 1000);
   };
 
   if (!props.isShown) return null;
