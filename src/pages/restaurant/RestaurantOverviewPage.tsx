@@ -47,6 +47,9 @@ const RestaurantOverviewPage: React.FC = () => {
 
     fetchRestaurantDetail();
     fetchRestaurantReview();
+  }, [id]);
+
+  useEffect(() => {
     setPhotos(
       reviews.map(
         (review) =>
@@ -71,7 +74,7 @@ const RestaurantOverviewPage: React.FC = () => {
   useOnClickOutside(imageRef, () => setPopUpOpen(false));
 
   const buttons = ["Reviews", "Photos", "Menus"];
-  // if (!restaurantDetail) return null;
+  if (!restaurantDetail) return null;
 
   return (
     <>
