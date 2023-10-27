@@ -22,4 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-save.json
+package-project.json
 myFavicon.ico
