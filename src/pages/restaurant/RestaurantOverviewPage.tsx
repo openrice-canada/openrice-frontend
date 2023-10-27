@@ -28,6 +28,7 @@ const RestaurantOverviewPage: React.FC = () => {
   const [menus, setMenus] = useState<string[]>([]);
   const [popUpOpen, setPopUpOpen] = useState(false);
   const imageRef = useRef<null | HTMLDivElement>(null);
+  const formRef = useRef<null | HTMLDivElement>(null);
   const [selectedImage, setSelectedImage] = useState<string>("");
 
   useEffect(() => {
@@ -69,6 +70,7 @@ const RestaurantOverviewPage: React.FC = () => {
     setPopUpOpen(false);
   };
   useOnClickOutside(imageRef, () => setPopUpOpen(false));
+  useOnClickOutside(formRef, () => setIsShownAddReviewModal(false));
 
   const buttons = ["Reviews", "Photos", "Menus"];
   if (!restaurantDetail) return null;
@@ -78,6 +80,7 @@ const RestaurantOverviewPage: React.FC = () => {
       <AddReviewModal
         isShown={isShownAddReviewModal}
         setIsShown={setIsShownAddReviewModal}
+        formRef={formRef}
       />
       <div className="max-w-5xl mx-auto px-3 pt-3">
         <div className="flex font-semibold justify-between">
