@@ -2,17 +2,17 @@
 import { createContext, useState } from "react";
 import Layout from "./components/layout/Layout";
 import { Outlet, ScrollRestoration } from "react-router-dom";
-import { User } from "./api/auth/authType";
+import { UserEntity } from "./api/auth/authType";
 
 interface UserInfo {
-  userInfo: User | null;
-  setUserInfo: React.Dispatch<React.SetStateAction<User | null>>;
+  userInfo: UserEntity | null;
+  setUserInfo: React.Dispatch<React.SetStateAction<UserEntity | null>>;
 }
 
 export const UserContext = createContext<UserInfo | null>(null);
 
 function App() {
-  const [userInfo, setUserInfo] = useState<User | null>(() => {
+  const [userInfo, setUserInfo] = useState<UserEntity | null>(() => {
     if (!sessionStorage.getItem("userInfo")) return null;
     return JSON.parse(sessionStorage.getItem("userInfo")!);
   });

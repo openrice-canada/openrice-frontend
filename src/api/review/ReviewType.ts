@@ -13,3 +13,13 @@ export type Review = {
   username: string;
   restaurantName: string;
 };
+
+export type CreateReviewRequest = {
+  userId: string;
+  restaurantId: string;
+  rating: number;
+  title: string;
+  visitDate: Date;
+  content: string;
+  spending: number;
+}

@@ -1,25 +1,53 @@
-import { Review } from "../../api/review/ReviewType";
+import { CreateReviewRequest, Review } from "../../api/review/ReviewType";
 import { Controller, useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
 import TextInput from "../Input/TextInput";
+import { postReview } from "../../api/review";
+import { useContext } from "react";
+import { UserContext } from "../../App";
+import { TextareaInput } from "../Input/TextareaInput";
+import { useNavigate } from "react-router-dom";
 
 type AddReviewModalProps = {
   isShown: boolean;
   setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
   formRef: React.MutableRefObject<HTMLDivElement | null>;
+  restaurantId?: string;
 };
 
-const addReview = async (review: Review) => {
-  // TODO
-  console.log(review);
-};
+type ReviewForm = {
+  rating: number;
+  title: string;
+  visitDate: string;
+  content: string;
+  spending: number;
+}
 
 const AddReviewModal: React.FC<AddReviewModalProps> = (
   props: AddReviewModalProps
 ) => {
+  const navigate = useNavigate();
+  const context = useContext(UserContext);
   const { control, handleSubmit } = useForm({
-    defaultValues: {} as Review,
+    defaultValues: {
+      title: '',
+      content: '',
+      spending: 0,
+      rating: 0,
+      visitDate: '',
+    } as ReviewForm,
   });
+
+  const addReview = async (review: ReviewForm) => {
+    await postReview({
+      ...review,
+      restaurantId: props?.restaurantId as string,
+      userId: context?.userInfo?.userId as string,
+      visitDate: new Date(review.visitDate),
+    });
+    navigate(`/restaurant/${props?.restaurantId}`)
+    navigate(0)
+  };
 
   if (!props.isShown) return null;
   return (
@@ -45,13 +73,12 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
           {/*body*/}
           <div className="relative p-6 flex flex-col items-center gap-6 overflow-auto">
             <form
-              className="w-full gap-6 flex flex-col"
+              className="w-full gap-2 flex flex-col"
               onSubmit={handleSubmit((review) => addReview(review))}
             >
               <Controller
                 control={control}
                 name="title"
-                defaultValue=""
                 render={({ field }) => (
                   <TextInput
                     value={field.value}
@@ -65,14 +92,53 @@ const AddReviewModal: React.FC<AddReviewModalProps> = (
               <Controller
                 control={control}
                 name="content"
-                defaultValue=""
                 render={({ field }) => (
-                  <TextInput
+                  <TextareaInput
                     value={field.value}
                     onChange={field.onChange}
                     label="Content"
                     type="text"
                     placeholder="Type something"
+                    className="border border-gray-400 rounded-md p-2 text-sm"
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name='rating'
+                render={({ field }) => (
+                  <TextInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    label="Rating"
+                    type='number'
+                    placeholder="rating from 1 to 5"
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name='spending'
+                render={({ field }) => (
+                  <TextInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    label="Spending"
+                    type='number'
+                    placeholder='How much did you spend?'
+                  />
+                )}
+              />
+              <Controller
+                control={control}
+                name='visitDate'
+                render={({ field }) => (
+                  <TextInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    label='Visit Date'
+                    type='date'
+                    placeholder=''
                   />
                 )}
               />
