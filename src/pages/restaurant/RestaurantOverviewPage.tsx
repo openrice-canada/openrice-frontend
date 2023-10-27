@@ -22,6 +22,8 @@ const RestaurantOverviewPage: React.FC = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [page, setPage] = useState("Reviews");
   const [isShownAddReviewModal, setIsShownAddReviewModal] = useState(false);
+  const [photos, setPhotos] = useState<string[]>([]);
+  const [menus, setMenus] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchRestaurantDetail = async () => {
@@ -40,16 +42,22 @@ const RestaurantOverviewPage: React.FC = () => {
 
     fetchRestaurantDetail();
     fetchRestaurantReview();
-  }, [id]);
+    setPhotos(
+      reviews.map(
+        (review) =>
+          `${process.env.REACT_APP_IMAGE_PREFIX}/reviews/${id}/${review.reviewId}`
+      )
+    );
+    setMenus(
+      reviews.map(
+        (review) =>
+          `${process.env.REACT_APP_IMAGE_PREFIX}/menus/${id}/${review.reviewId}`
+      )
+    );
+  }, [id, reviews]);
 
   const buttons = ["Reviews", "Photos", "Menus"];
   if (!restaurantDetail) return null;
-  // const imageUpload = (e: any) => {
-  //   e.preventDefault();
-  //   if (image && id) {
-  //     uploadImage(image, id);
-  //   }
-  // };
 
   return (
     <>
@@ -122,7 +130,7 @@ const RestaurantOverviewPage: React.FC = () => {
             {reviews.length > 0 && (
               <div className="grid grid-cols-1 gap-4">
                 {reviews.map((review) => (
-                  <ReviewCard {...review} />
+                  <ReviewCard {...review} key={review.reviewId} />
                 ))}
               </div>
             )}
@@ -130,16 +138,46 @@ const RestaurantOverviewPage: React.FC = () => {
         )}
         {page === "Photos" && (
           <>
-            {
-              //TODO
-            }
+            <h1 className="text-2xl font-bold my-4">Photos</h1>
+            {photos.length === 0 && <div>No photos in this restaurant</div>}
+            {photos.length > 0 && (
+              <div className="grid grid-cols-1 gap-4">
+                {photos.map((photo, index) => (
+                  <div className="grid grid-cols-1 gap-4">
+                    <img
+                      key={`photo${index}`}
+                      src={photo}
+                      width="300"
+                      height="200"
+                      className="object-cover w-[300px] h-auto"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </>
         )}
         {page === "Menus" && (
           <>
-            {
-              //TODO
-            }
+            <h1 className="text-2xl font-bold my-4">Menus</h1>
+            {menus.length === 0 && (
+              <div>No menu photos are provided for this restaurant</div>
+            )}
+            {menus.length > 0 && (
+              <div className="grid grid-cols-1 gap-4">
+                {menus.map((menu, index) => (
+                  <div className="grid grid-cols-1 gap-4">
+                    <img
+                      key={`menu${index}`}
+                      src={menu}
+                      width="300"
+                      height="200"
+                      className="object-cover w-[300px] h-auto"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
           </>
         )}
       </div>
