@@ -1,8 +1,8 @@
 {
   "name": "openrice_frontend",
-  "homepage": "https://openricecan.netlify.app/",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://openricecan.netlify.app/",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@supabase/supabase-js": "^2.38.4",
