@@ -44,4 +44,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## License
 
-OpenRice Frontend is licensed under [GNU General Public License v3.0](LICENSE).
+Openrice Frontend is licensed under [GNU General Public License v3.0](LICENSE).
